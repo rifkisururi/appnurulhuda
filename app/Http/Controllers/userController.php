@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\User;
 
-class tagihanController extends Controller
+class userController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,25 +14,7 @@ class tagihanController extends Controller
      */
     public function index()
     {
-        $tagihan = 
-            DB::table('tagihan_detail')
-            ->join('tagihan_master', 'tagihan_master.id', '=', 'tagihan_detail.id_tagihan_master')
-            ->join('users', 'users.id', '=', 'tagihan_detail.id_user')
-            ->select('tagihan_master.name', 'tagihan_detail.jumlah', 'users.name as nama_santri','tagihan_detail.flag_pay', 'tagihan_detail.id')
-            ->get(); 
-        
-        $santri = DB::table('users')->get(); 
-        $tagihan_master = DB::table('tagihan_master')->get(); 
-            
-        return view('admin.tagihan.index', [
-            'tagihan' => $tagihan, 
-            'santri' => $santri,
-            'tagihan_master' => $tagihan_master,
-            ]);
-    }
-
-    public function actionTagihan(){
-        
+        //
     }
 
     /**

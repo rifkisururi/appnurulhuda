@@ -15,7 +15,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Tagihan</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -26,38 +26,56 @@
                 <td>Nama Santri</td>
                 <td></td>
                 <td>
-                    <select class="form-control" id="sel1">
-                        <option>Nama Santri 1</option>
-                        <option>Nama Santri 2</option>
-                        <option>Nama Santri 3</option>
-                        <option>Nama Santri 4</option>
+                    <select class="form-control" name="id_user">
+                        @foreach($santri as $s){
+                            <option>{{ $s->name }}</option>
+                        }
+                        @endforeach
                     </select>
                 </td>
             </tr>
             <tr>
                 <td>Nama Tagihan</td>
                 <td></td>
-                <td><input type="text" class="form-control"> </td>
+                <td>
+                    <select class="form-control" name="id_tagihan_master">
+                        @foreach($tagihan_master as $tm){
+                            <option>{{ $tm->name }}</option>
+                        }
+                        @endforeach
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>Jumlah</td>
                 <td></td>
-                <td><input type="number" class="form-control"> </td>
+                <td><input type="number" class="form-control" name="jumlah"> </td>
             </tr>
             <tr>
                 <td></td>
                 <td></td>
-                <td><button class="btn btn-primary">Simpan</button> </td>
+                <td><button class="btn btn-primary" data-dismiss="modal">Simpan</button> </td>
             </tr>
         </table>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer" hidden>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
 </div>
+
+    <br>
+    Filter<br>
+    Status Tagihan 
+    <select class="form-control" id="sel1">
+        <option>Semua</option>
+        <option>Lunas</option>
+        <option>Belum Lunas</option>
+    </select>
+    
+    <button class="btn btn-primary">Cari</button>
 
     <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                 <thead class="thead-dark">
@@ -74,7 +92,7 @@
                     <tr>
                         <td>{{ $t->nama_santri}}</td>
                         <td>{{ $t->name}}</td>
-                        <td>{{ $t->jumlah}}</td>
+                        <td> <?php echo number_format($t->jumlah) ?></td>
                         <td>
                         <?php 
                             if($t->flag_pay == 0){
