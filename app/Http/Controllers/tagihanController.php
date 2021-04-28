@@ -19,7 +19,7 @@ class tagihanController extends Controller
             ->join('tagihan_master', 'tagihan_master.id', '=', 'tagihan_detail.id_tagihan_master')
             ->join('users', 'users.id', '=', 'tagihan_detail.id_user')
             ->select('tagihan_master.name', 'tagihan_detail.jumlah', 'users.name as nama_santri','tagihan_detail.flag_pay', 'tagihan_detail.id')
-            ->get();
+            ->get(); 
             
         return view('admin.tagihan.index', ['tagihan' => $tagihan]);
     }
