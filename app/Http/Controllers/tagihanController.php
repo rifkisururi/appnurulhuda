@@ -31,6 +31,29 @@ class tagihanController extends Controller
             ]);
     }
 
+    public function nominal_tagihan($id){
+
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: *');
+        header('Access-Control-Allow-Headers: *');
+
+        $jml_tagihan = 
+            DB::table('tagihan_master')
+            ->where('id', '=', $id)
+            //->select('jumlah')
+            ->value('jumlah');
+            //->get();
+        
+            $data = array(
+                        'jumlah' => $jml_tagihan
+                    );
+        
+        return response([
+            'success' => true,
+            'data' => $data
+        ], 200);
+    }
+
     public function actionTagihan(){
         
     }

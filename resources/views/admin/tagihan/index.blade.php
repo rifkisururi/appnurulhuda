@@ -38,9 +38,9 @@
                 <td>Nama Tagihan</td>
                 <td></td>
                 <td>
-                    <select class="form-control" name="id_tagihan_master">
+                    <select class="form-control" name="id_tagihan_master" id="id_tagihan_master" onchange='getNominal()'>
                         @foreach($tagihan_master as $tm){
-                            <option>{{ $tm->name }}</option>
+                            <option value="{{ $tm->id }}">{{ $tm->name }}</option>
                         }
                         @endforeach
                     </select>
@@ -49,7 +49,7 @@
             <tr>
                 <td>Jumlah</td>
                 <td></td>
-                <td><input type="number" class="form-control" name="jumlah"> </td>
+                <td><input type="number" class="form-control" name="jumlah" id="jumlah" disabled> </td>
             </tr>
             <tr>
                 <td></td>
@@ -111,5 +111,21 @@
             </div>
             </div>
             </div>
+
+            <script>
+            
+            
+            function getNominal(){
+                var id = document.getElementById("id_tagihan_master").value;
+                var url = "http://127.0.0.1:8000/nominal_tagihan/" + id;
+                $.get(url, function(data){
+                    console.log(data.data.jumlah);
+                    
+                    document.getElementById("jumlah").value = data.data.jumlah;
+                });
+
+            }
+
+            </script>
             
 @endsection
