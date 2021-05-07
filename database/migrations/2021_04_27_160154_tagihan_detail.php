@@ -20,6 +20,7 @@ class TagihanDetail extends Migration
             $table->integer('jumlah');
             $table->integer('id_user_confirm');
             $table->integer('flag_pay');
+            $table->integer('created_by');
             $table->timestamps();
         });
     }

@@ -20,6 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/tagihan', [App\Http\Controllers\tagihanController::class, 'index'])->name('tagihanIndex');
+Route::get('/tagihan', [App\Http\Controllers\tagihanController::class, 'index'])->name('tagihan');
 
 Route::get('/nominal_tagihan/{id}', [App\Http\Controllers\tagihanController::class, 'nominal_tagihan'])->name('nominal_tagihan');
+
+//Route::get('/tagihan', [App\Http\Controllers\tagihanController::class, 'index'])->name('tagihan-master');
+
+Route::get('/santri', [App\Http\Controllers\santriController::class, 'index'])->name('santri');
+Route::POST('/santri', [App\Http\Controllers\santriController::class, 'store'])->name('santri-post');
