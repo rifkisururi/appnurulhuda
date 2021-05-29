@@ -18,6 +18,8 @@
                         <th>Nama Santri</th>
                         <th>Tagihan</th>
                         <th>Nominal</th>
+                        <th>Jatuh Tempo</th>
+                        <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -27,6 +29,7 @@
                         <td>{{ $t->nama_santri}}</td>
                         <td>{{ $t->name}}</td>
                         <td> <?php echo number_format($t->jumlah) ?></td>
+                        <td>{{ $t->jatuh_tempo}}</td>
                         <td>
                             <?php
                             if ($t->flag_pay == 0) {
@@ -36,7 +39,23 @@
                             }
                             ?>
                         </td>
-                        <td> <button class="btn btn-success">Terima</button> </td>
+                        <td>
+                            <button class="btn btn-success" onclick="action({{ $t->id}},1)">Terima</button>
+
+                            @php
+
+                            $tgl1 = date('Y-m-d'); // pendefinisian tanggal awal
+                            $tgl2 = date('Y-m-d', strtotime('-3 days', strtotime($tgl1)));
+
+                            if ($t->tanggal_bayar >= $tgl2) {
+                            } else {
+                            echo "lunas";
+                            }
+
+
+                            @endphp
+                            <button class="btn btn-danger" onclick="action({{ $t->id}},2)">Belum diterima</button>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -53,7 +72,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('santri-post') }}" method="POST">
+            <form action="" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
@@ -61,7 +80,7 @@
                         <select class="form-control" name="id_user" required>
                             <option value="">Pilih Santri</option>
                             @foreach($santri as $s){
-                            <option>{{ $s->name }}</option>
+                            <option value="{{ $s->id }}">{{ $s->name }}</option>
                             }
                             @endforeach
                         </select>
@@ -78,11 +97,14 @@
                     </div>
                     <div class="form-group">
                         <label>Jumlah</label>
-                        <td><input type="text" class="form-control" name="jumlah" id="jumlah" disabled> </td>
+                        <td><input type="text" class="form-control" name="jumlah" id="jumlah"> </td>
+                    </div>
+                    <div class="form-group">
+                        <label>Jatuh Tempo</label>
+                        <td><input type="date" class="form-control" name="jatuhtempo"> </td>
                     </div>
                     <div class="form-group">
                         <label style="color: red;">Setelah tekan tombol "Simpan", orang tua/ Wali santri akan mendapat notifkasi tagihan melalui Whatsapp</label>
-
                     </div>
 
 
@@ -99,10 +121,19 @@
 <script>
     function getNominal() {
         var id = document.getElementById("id_tagihan_master").value;
-        var url = "http://127.0.0.1:8000/nominal_tagihan/" + id;
+        var url = "nominal_tagihan/" + id;
         $.get(url, function(data) {
             console.log(data.data.jumlah);
-            document.getElementById("jumlah").value = numberWithCommas(data.data.jumlah);
+            document.getElementById("jumlah").value = data.data.jumlah;
+            //numberWithCommas(data.data.jumlah);
+        });
+    }
+
+    function action(id, status) {
+        var id = document.getElementById("id_tagihan_master").value;
+        var url = "tagihanAction?id=" + id + "&action=" + status;
+        $.get(url, function(data) {
+            alert('sukses');
         });
 
     }

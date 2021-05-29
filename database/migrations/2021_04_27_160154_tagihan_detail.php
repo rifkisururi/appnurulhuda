@@ -18,7 +18,9 @@ class TagihanDetail extends Migration
             $table->integer('id_user');
             $table->integer('id_tagihan_master');
             $table->integer('jumlah');
+            $table->date('jatuh_tempo');
             $table->integer('id_user_confirm');
+            $table->date('tanggal_bayar');
             $table->integer('flag_pay');
             $table->integer('created_by');
             $table->timestamps();
