@@ -34,6 +34,6 @@ class TagihanDetail extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('tagihan_detail');
     }
 }

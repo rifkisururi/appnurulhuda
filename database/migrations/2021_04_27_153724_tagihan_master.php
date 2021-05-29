@@ -29,6 +29,6 @@ class TagihanMaster extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('tagihan_master');
     }
 }
