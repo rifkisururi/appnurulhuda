@@ -22,7 +22,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/tagihan', [App\Http\Controllers\tagihanController::class, 'index'])->name('tagihan');
 Route::POST('/tagihan', [App\Http\Controllers\tagihanController::class, 'store']);
-Route::get('/tagihanterima/{id}', [App\Http\Controllers\tagihanController::class, 'terima']);
+Route::get('/tagihanAction', [App\Http\Controllers\tagihanController::class, 'action']);
 
 Route::get('/nominal_tagihan/{id}', [App\Http\Controllers\tagihanController::class, 'nominal_tagihan'])->name('nominal_tagihan');
 
@@ -31,3 +31,5 @@ Route::POST('/tagihanMaster', [App\Http\Controllers\tagihanMasterController::cla
 
 Route::get('/santri', [App\Http\Controllers\santriController::class, 'index'])->name('santri');
 Route::POST('/santri', [App\Http\Controllers\santriController::class, 'store'])->name('santri-post');
+
+Route::get('/laporanTahunan', [App\Http\Controllers\laporanController::class, 'perTahun'])->name('laporan');

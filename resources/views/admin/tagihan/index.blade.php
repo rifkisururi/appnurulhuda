@@ -40,21 +40,31 @@
                             ?>
                         </td>
                         <td>
-                            <button class="btn btn-success" onclick="action({{ $t->id}},1)">Terima</button>
-
+                           
                             @php
+                            if ($t->tanggal_bayar == '2021-01-01') {
+                            @endphp
+                                <button class="btn btn-info" onclick="action({{$t->id}},1)">Terima Pembayaran</button>
+                            @php
+                            }else{
+                                $tgl1 = date('Y-m-d'); // pendefinisian tanggal awal
+                                $tgl2 = date('Y-m-d', strtotime('-3 days', strtotime($tgl1)));
 
-                            $tgl1 = date('Y-m-d'); // pendefinisian tanggal awal
-                            $tgl2 = date('Y-m-d', strtotime('-3 days', strtotime($tgl1)));
+                                if ($t->tanggal_bayar >= $tgl2) {
+                                @endphp
+                                    <button class="btn btn-warning" onclick="action({{$t->id}},0)">batalkan penerimaan</button>
+                                @php
+                                }else{  
+                                @endphp
+                                    <button class='btn btn-success'>Lunas</button>
 
-                            if ($t->tanggal_bayar >= $tgl2) {
-                            } else {
-                            echo "lunas";
+                                @php
+                                }
                             }
 
-
+                            
                             @endphp
-                            <button class="btn btn-danger" onclick="action({{ $t->id}},2)">Belum diterima</button>
+
                         </td>
                     </tr>
                     @endforeach
@@ -125,16 +135,16 @@
         $.get(url, function(data) {
             console.log(data.data.jumlah);
             document.getElementById("jumlah").value = data.data.jumlah;
-            //numberWithCommas(data.data.jumlah);
+
         });
     }
 
     function action(id, status) {
-        var id = document.getElementById("id_tagihan_master").value;
         var url = "tagihanAction?id=" + id + "&action=" + status;
         $.get(url, function(data) {
             alert('sukses');
         });
+        location.reload();
 
     }
 

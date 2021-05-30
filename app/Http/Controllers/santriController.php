@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class santriController extends Controller
 {
@@ -22,6 +23,7 @@ class santriController extends Controller
         $add->password = $request->no_hp1;
         $add->no_hp1 = $request->no_hp1;
         $add->no_hp2 = $request->no_hp2;
+        $add->password = Hash::make('password');
         $add->save();
 
         $add->assignRole('santri');

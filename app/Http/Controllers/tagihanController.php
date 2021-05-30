@@ -56,12 +56,21 @@ class tagihanController extends Controller
         ], 200);
     }
 
-    public function terima($id)
+    public function action(Request $request)
     {
-    }
+        $id = $_GET['id'];
+        $action = $_GET['action'];
+        
+        $data = tagihan_detail_model::findOrFail($id);
 
-    public function actionTagihan()
-    {
+        $data->flag_pay = $action;
+        if($action == 1){
+            $data->tanggal_bayar = date('Y-m-d');
+        }else{
+            $data->tanggal_bayar = '2021-01-01';
+        }
+
+        $data->save();
     }
 
     /**
