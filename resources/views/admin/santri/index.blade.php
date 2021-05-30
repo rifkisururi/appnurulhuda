@@ -31,8 +31,12 @@
                             {{ $u->no_hp1}} <br>
                             {{ $u->no_hp2}}
                         </td>
-                        <td></td>
-                        <td></td>
+                        <td>
+                            {{ $u->hakAkses}}                          
+                        </td>
+                        <td>
+                            <a href="user/ubahAkses/{{ $u->id}}"><button class="btn btn-warning btn-sm">Ubah Akses</button></a>                     
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
