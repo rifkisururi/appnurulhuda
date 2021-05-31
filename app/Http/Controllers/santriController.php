@@ -40,24 +40,26 @@ class santriController extends Controller
         return redirect('santri');
     }
 
-    public function personalInfo(Request $request){
+    public function personalInfo()
+    {
 
         $id = Auth::user()->id;
-        $santri = DB::table('users')->where('id','=',$id)->first();
+        $santri = DB::table('users')->where('id', '=', $id)->first();
 
         return view('santri.personalinfo', [
             'data' => $santri
         ]);
     }
 
-    public function personalInfoUpdate(Request $request){
+    public function personalInfoUpdate(Request $request)
+    {
         $id = Auth::user()->id;
         $user = User::find($id);
         $user->name = $request->get('nama');
         $user->no_hp1 = $request->get('no_hp1');
         $user->no_hp2 = $request->get('no_hp2');
         $user->email = $request->get('email');
-        if($request->get('passwordBaru') != "" && $request->get('passwordBaru') == $request->get('passwordBaru2') ){
+        if ($request->get('passwordBaru') != "" && $request->get('passwordBaru') == $request->get('passwordBaru2')) {
             $user->password = Hash::make($request->get('passwordBaru'));
         }
         $user->save();

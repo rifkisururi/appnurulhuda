@@ -29,7 +29,14 @@
                         <td> <?php echo number_format($t->jumlah) ?></td>
                         <td>
                             <button class="btn btn-warning">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
+                            @php
+                            if($t->used == 0){
+                            @endphp
+                            <a href="/tagihanMasterHapus/{{$t->id}}"><button class="btn btn-danger">Delete</button></a>
+                            @php
+                            }
+                            @endphp
+
                         </td>
                     </tr>
                     @endforeach
