@@ -42,5 +42,11 @@ Route::POST('/tagihanMaster', [App\Http\Controllers\tagihanMasterController::cla
 
 Route::get('/santri', [App\Http\Controllers\santriController::class, 'index'])->name('santri');
 Route::POST('/santri', [App\Http\Controllers\santriController::class, 'store'])->name('santri-post');
+Route::get('/user/ubahAkses/{id}', [App\Http\Controllers\santriController::class, 'ubahAkses']);
+Route::put('/user/ubahAkses/{id}', [App\Http\Controllers\santriController::class, 'updateAkses']);
+
 
 Route::get('/laporanTahunan', [App\Http\Controllers\laporanController::class, 'perTahun'])->name('laporan');
+
+Route::get('/personalinfo', [App\Http\Controllers\santriController::class, 'personalInfo'])->name('personal-info');
+Route::POST('/personalinfo', [App\Http\Controllers\santriController::class, 'personalInfoUpdate']);

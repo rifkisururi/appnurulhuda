@@ -70,7 +70,7 @@
                 </a>
                 <div id="collapsePagesTagihan" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('tagihan') }}"> Tagihan</a>
+                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('tagihan') }}"> Daftar Tagihan</a>
                         <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('laporan') }}"> Laporan</a>
                     </div>
                 </div>
@@ -142,7 +142,7 @@
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{ route('personal-info') }}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -174,7 +174,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Create By: Your Name<br>Copyright &copy; Your Website 2020</span>
+                        <span>Create By: Rifki Ahmad Sururi<br>Copyright &copy; Pondok Pesantren Nurul Huda 2021</span>
                     </div>
                 </div>
             </footer>
