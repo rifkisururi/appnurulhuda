@@ -26,6 +26,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                @php $year = 2021; @endphp 
                 @foreach($data as $d)
                     <tr>
                         <td>{{$d->name}}</td>
@@ -35,7 +36,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,1,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -46,7 +47,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,2,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -57,7 +58,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,3,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -68,7 +69,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,4,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -79,7 +80,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,5,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -89,7 +90,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,6,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -99,7 +100,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,7,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -110,7 +111,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,8,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -121,7 +122,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,9,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -132,7 +133,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,10,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -143,7 +144,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,11,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -154,7 +155,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,12,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -167,5 +168,34 @@
         </div>
     </div>
 </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detail Tunggakan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <iframe url="" id="iframe" style="border: none;" width="100%" height="500px"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function gantiID(id, bulan, tahun) {
+        var url = "tagihanSantri?id=" + id+"&bulan="+bulan+"&tahun="+tahun;
+        document.getElementById('iframe').src = url;
+    }
+</script>
 
 @endsection

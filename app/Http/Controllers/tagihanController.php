@@ -119,8 +119,8 @@ class tagihanController extends Controller
     // backend 
     private function tagihanPerSantri($id, $bulan, $tahun)
     {
-        echo $bulan . "<br>" . $tahun;
         if ($bulan == 0 || $tahun == 0) {
+            
             $tagihan =
                 DB::table('tagihan_detail')
                 ->join('tagihan_master', 'tagihan_master.id', '=', 'tagihan_detail.id_tagihan_master')
@@ -129,16 +129,25 @@ class tagihanController extends Controller
                 ->select('tagihan_master.name', 'tagihan_detail.jumlah', 'tagihan_detail.flag_pay', 'tagihan_detail.id', 'tagihan_detail.jatuh_tempo', 'tagihan_detail.tanggal_bayar')
                 ->get();
         } else {
-            $tagihan =
-                DB::table('tagihan_detail')
-                ->join('tagihan_master', 'tagihan_master.id', '=', 'tagihan_detail.id_tagihan_master')
-                ->where('tagihan_detail.id_user', '=', $id)
-                ->where('tagihan_detail.flag_pay', '=', 0)
-                ->where('tagihan.')
-                ->select('tagihan_master.name', 'tagihan_detail.jumlah', 'tagihan_detail.flag_pay', 'tagihan_detail.id', 'tagihan_detail.jatuh_tempo', 'tagihan_detail.tanggal_bayar')
-                ->get();
+           
+            $query = "
+                select 
+                    td.id, td.jumlah, td.jatuh_tempo, tm.name
+                from 
+                    tagihan_detail td
+                    inner join tagihan_master tm on td.id_tagihan_master = tm.id
+                where year(td.jatuh_tempo) = ".$tahun." and month(td.jatuh_tempo) = ".$bulan." and flag_pay = 0 and td.id_user = ".$id."
+                ";
+                
+                $tagihan = $this->execQuery($query);
         }
 
         return $tagihan;
+    }
+
+    private function execQuery($query){
+        // echo $query;
+        $output = DB::select($query);
+        return $output;
     }
 }
