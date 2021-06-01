@@ -73,11 +73,10 @@ class laporanController extends Controller
     public function rekapTunggakan()
     {
         $data = DB::select("
-        
         select 
             id, 
             namaSantri as name ,  
-            group_concat(jumlahPerJenis, ' X ', namaTagihan, ' ', FORMAT(totalPerTagihan ,0), ' ') as tunggakan,
+            group_concat(jumlahPerJenis, ' X ', namaTagihan, ' @', FORMAT(jumlah,0), ' = ' , FORMAT(totalPerTagihan ,0), ' ') as tunggakan,
             sum(total) as total
         from
         (
@@ -85,15 +84,16 @@ class laporanController extends Controller
                 u.id, u.name as namaSantri, 
                 COUNT(tm.id) as jumlahPerJenis,
                 tm.name as namaTagihan,
+                td.jumlah, 
                 sum(td.jumlah) as totalPerTagihan,
                 sum(td.jumlah) as total
             from 
                 users u
-                left join tagihan_detail td on u.id = td.id_user 
+                left join tagihan_detail td on u.id = td.id_user
                 left join tagihan_master tm on td.id_tagihan_master = tm.id 
             where 
                 td.flag_pay = 0
-            GROUP by u.id, u.name, tm.id, tm.name 
+            GROUP by u.id, u.name, tm.id, tm.name, td.jumlah
         ) a
         GROUP by id, namaSantri
         ");
