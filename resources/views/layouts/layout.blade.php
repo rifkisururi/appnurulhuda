@@ -73,6 +73,7 @@
                 <div id="collapsePagesTagihan" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('tagihan') }}"> Daftar Tagihan</a>
+                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('laporanTunggakan') }}"> Belum Dibayar</a>
                         <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('laporan') }}"> Laporan</a>
                     </div>
                 </div>

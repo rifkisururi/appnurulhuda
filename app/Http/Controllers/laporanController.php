@@ -7,7 +7,8 @@ use DB;
 
 class laporanController extends Controller
 {
-    public function perTahun(){
+    public function perTahun()
+    {
         $data = DB::select("
 	select 
 		u.id, u.name, 
@@ -65,6 +66,24 @@ class laporanController extends Controller
         ");
 
         return view('admin.laporan.tahunan', [
+            'data' => $data
+        ]);
+    }
+
+    public function rekapTunggakan()
+    {
+        $data = DB::select("
+        select 
+            u.id, u.name, group_concat(tm.name,' ',FORMAT(td.jumlah,0), ' ') as tunggakan, sum(td.jumlah) as total
+        from 
+            users u
+            left join tagihan_detail td on u.id = td.id_user 
+            left join tagihan_master tm on td.id_tagihan_master = tm.id 
+        where td.flag_pay = 0
+        GROUP by u.id, u.name
+        ");
+
+        return view('admin.laporan.tunggakan', [
             'data' => $data
         ]);
     }
