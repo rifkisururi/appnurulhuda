@@ -15,27 +15,15 @@ class tagihan_master_seeder extends Seeder
     public function run()
     {
         tagihan_master_model::create([
+            'name' => 'Syahriyyah Madin',
+            'keterangan' => '',
+            'jumlah' => 20000
+        ]);
+
+        tagihan_master_model::create([
             'name' => 'Pajek',
-            'keterangan' => 'pajek makan',
+            'keterangan' => 'Pajek',
             'jumlah' => 150000
-        ]);
-
-        tagihan_master_model::create([
-            'name' => 'Shariah TPQ',
-            'keterangan' => 'Shariah TPQ',
-            'jumlah' => 8000
-        ]);
-
-        tagihan_master_model::create([
-            'name' => 'Internet',
-            'keterangan' => 'Internet',
-            'jumlah' => 1000
-        ]);
-
-        tagihan_master_model::create([
-            'name' => 'Kebersihan',
-            'keterangan' => 'Kebersihan',
-            'jumlah' => 2000
         ]);
     }
 }
