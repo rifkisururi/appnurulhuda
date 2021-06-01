@@ -73,14 +73,29 @@ class laporanController extends Controller
     public function rekapTunggakan()
     {
         $data = DB::select("
+        
         select 
-            u.id, u.name, group_concat(tm.name,' ',FORMAT(td.jumlah,0), ' ') as tunggakan, sum(td.jumlah) as total
-        from 
-            users u
-            left join tagihan_detail td on u.id = td.id_user 
-            left join tagihan_master tm on td.id_tagihan_master = tm.id 
-        where td.flag_pay = 0
-        GROUP by u.id, u.name
+            id, 
+            namaSantri as name ,  
+            group_concat(jumlahPerJenis, ' X ', namaTagihan, FORMAT(totalPerTagihan ,0), ' ') as tunggakan,
+            sum(total) as total
+        from
+        (
+            select 
+                u.id, u.name as namaSantri, 
+                COUNT(tm.id) as jumlahPerJenis,
+                tm.name as namaTagihan,
+                sum(td.jumlah) as totalPerTagihan,
+                sum(td.jumlah) as total
+            from 
+                users u
+                left join tagihan_detail td on u.id = td.id_user 
+                left join tagihan_master tm on td.id_tagihan_master = tm.id 
+            where 
+                td.flag_pay = 0
+            GROUP by u.id, u.name, tm.id, tm.name 
+        ) a
+        GROUP by id, namaSantri
         ");
 
         return view('admin.laporan.tunggakan', [
