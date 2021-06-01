@@ -161,8 +161,10 @@
         var isconfirm = confirmAlert(note);
         if (isconfirm == 1) {
             var url = "tagihanAction?id=" + id + "&action=" + status;
-            $.get(url, function(data) {});
-            location.reload();
+            $.get(url, function(data) {
+                location.reload();
+            });
+
         }
     }
 
