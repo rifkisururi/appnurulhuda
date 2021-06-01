@@ -22,6 +22,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/tagihan', [App\Http\Controllers\tagihanController::class, 'index'])->name('tagihan');
 Route::POST('/tagihan', [App\Http\Controllers\tagihanController::class, 'store']);
 Route::get('/tagihanAction', [App\Http\Controllers\tagihanController::class, 'action']);
+Route::get('/tagihanSantri', [App\Http\Controllers\tagihanController::class, 'vw_tagihanPerSantri']);
+
 
 Route::get('/nominal_tagihan/{id}', [App\Http\Controllers\tagihanController::class, 'nominal_tagihan'])->name('nominal_tagihan');
 

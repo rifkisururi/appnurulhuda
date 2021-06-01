@@ -152,12 +152,18 @@
     }
 
     function action(id, status) {
-        var url = "tagihanAction?id=" + id + "&action=" + status;
-        $.get(url, function(data) {
-            alert('sukses');
-        });
-        location.reload();
-
+        var note;
+        if (status == 1) {
+            note = "Apakah anda yakin sudah menerima pembayaran ini ?";
+        } else {
+            note = "Apakah anda yakin membatalkan penerimaan pembayaran ini ?";
+        }
+        var isconfirm = confirmAlert(note);
+        if (isconfirm == 1) {
+            var url = "tagihanAction?id=" + id + "&action=" + status;
+            $.get(url, function(data) {});
+            location.reload();
+        }
     }
 
     function numberWithCommas(x) {
@@ -166,6 +172,18 @@
         while (pattern.test(x))
             x = x.replace(pattern, "$1,$2");
         return x;
+    }
+
+    function confirmAlert(note) {
+        var isconfirm;
+        var r = confirm(note);
+        if (r == true) {
+            isconfirm = 1;
+        } else {
+            isconfirm = 0;
+        }
+
+        return isconfirm;
     }
 </script>
 

@@ -8,11 +8,6 @@ use App\Models\tagihan_detail_model;
 
 class tagihanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $tagihan =
@@ -44,7 +39,7 @@ class tagihanController extends Controller
             ->where('id', '=', $id)
             //->select('jumlah')
             ->value('jumlah');
-        //->get();
+
 
         $data = array(
             'jumlah' => $jml_tagihan
@@ -60,35 +55,49 @@ class tagihanController extends Controller
     {
         $id = $_GET['id'];
         $action = $_GET['action'];
-        
+
         $data = tagihan_detail_model::findOrFail($id);
 
         $data->flag_pay = $action;
-        if($action == 1){
+        if ($action == 1) {
             $data->tanggal_bayar = date('Y-m-d');
-        }else{
+        } else {
             $data->tanggal_bayar = '2021-01-01';
         }
 
         $data->save();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function vw_tagihanPerSantri()
     {
-        //
+        $id = $_GET['id'];
+
+        if (isset($_GET['bulan'])) {
+            $bulan = $_GET['bulan'];
+        } else {
+            $bulan = 0;
+        }
+
+        if (isset($_GET['tahun'])) {
+            $tahun = $_GET['tahun'];
+        } else {
+            $tahun = 0;
+        }
+
+        $tagihan = $this->tagihanPerSantri($id, $bulan, $tahun);
+
+        $namaSantri =
+            DB::table('users')
+            ->where('id', '=', $id)
+            ->value('name');
+
+        return view('admin.tagihan.persantri', [
+            'tagihan' => $tagihan,
+            'namaSantri' => $namaSantri
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $add = new tagihan_detail_model;
@@ -101,55 +110,34 @@ class tagihanController extends Controller
         $add->flag_pay = 0;
         $add->created_by = 0;
 
-
-
         $add->save();
 
         return redirect('tagihan');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    // backend 
+    private function tagihanPerSantri($id, $bulan, $tahun)
     {
-        //
-    }
+        echo $bulan . "<br>" . $tahun;
+        if ($bulan == 0 || $tahun == 0) {
+            $tagihan =
+                DB::table('tagihan_detail')
+                ->join('tagihan_master', 'tagihan_master.id', '=', 'tagihan_detail.id_tagihan_master')
+                ->where('tagihan_detail.id_user', '=', $id)
+                ->where('tagihan_detail.flag_pay', '=', 0)
+                ->select('tagihan_master.name', 'tagihan_detail.jumlah', 'tagihan_detail.flag_pay', 'tagihan_detail.id', 'tagihan_detail.jatuh_tempo', 'tagihan_detail.tanggal_bayar')
+                ->get();
+        } else {
+            $tagihan =
+                DB::table('tagihan_detail')
+                ->join('tagihan_master', 'tagihan_master.id', '=', 'tagihan_detail.id_tagihan_master')
+                ->where('tagihan_detail.id_user', '=', $id)
+                ->where('tagihan_detail.flag_pay', '=', 0)
+                ->select('tagihan_master.name', 'tagihan_detail.jumlah', 'tagihan_detail.flag_pay', 'tagihan_detail.id', 'tagihan_detail.jatuh_tempo', 'tagihan_detail.tanggal_bayar')
+                ->get();
+        }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return $tagihan;
     }
 }
