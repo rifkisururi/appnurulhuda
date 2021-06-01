@@ -44,30 +44,7 @@
                         @else
                         @if (Auth::user()->hasRole('admin') or Auth::user()->hasRole('bendahara'))
                         <td>
-
-
-                            @php
-                            if ($t->tanggal_bayar == '2021-01-01') {
-                            @endphp
                             <button class="btn btn-info" onclick="action({{$t->id}},1)">Terima Pembayaran</button>
-                            @php
-                            }else{
-                            $tgl1 = date('Y-m-d'); // pendefinisian tanggal awal
-                            $tgl2 = date('Y-m-d', strtotime('-3 days', strtotime($tgl1)));
-
-                            if ($t->tanggal_bayar >= $tgl2) {
-                            @endphp
-                            <button class="btn btn-warning" onclick="action({{$t->id}},0)">batalkan penerimaan</button>
-                            @php
-                            }else{
-                            @endphp
-                            <button class='btn btn-success'>Lunas</button>
-
-                            @php
-                            }
-                            }
-                            @endphp
-
                         </td>
                         @endif
                         @endguest
@@ -105,7 +82,6 @@
         } else {
             isconfirm = 0;
         }
-
         return isconfirm;
     }
 </script>
