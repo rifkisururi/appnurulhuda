@@ -47,7 +47,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,2,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -58,7 +58,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,3,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -69,7 +69,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,4,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -80,7 +80,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,5,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -90,7 +90,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,6,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -100,7 +100,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,7,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -111,7 +111,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,8,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -122,7 +122,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,9,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -133,7 +133,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,10,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -144,7 +144,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,11,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
@@ -155,7 +155,7 @@
                                 if($sisa == 0){
                                     echo "<button class='btn btn-info btn-sm'>Lunas</button>";
                                 }else{
-                                    echo "<button class='btn btn-warning btn-sm'>".number_format($sisa)."</button>";
+                                    echo "<button onclick='gantiID($d->id,12,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
                                 }
                             @endphp                            
                         </td>
