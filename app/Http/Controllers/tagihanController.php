@@ -134,6 +134,7 @@ class tagihanController extends Controller
                 ->join('tagihan_master', 'tagihan_master.id', '=', 'tagihan_detail.id_tagihan_master')
                 ->where('tagihan_detail.id_user', '=', $id)
                 ->where('tagihan_detail.flag_pay', '=', 0)
+                ->where('tagihan.')
                 ->select('tagihan_master.name', 'tagihan_detail.jumlah', 'tagihan_detail.flag_pay', 'tagihan_detail.id', 'tagihan_detail.jatuh_tempo', 'tagihan_detail.tanggal_bayar')
                 ->get();
         }
