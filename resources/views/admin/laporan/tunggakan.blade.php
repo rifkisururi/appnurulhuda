@@ -22,7 +22,7 @@
                         <td>{{$d->name}}</td>
                         <td>
                             @php
-                            echo str_replace(' ,','<br>',$d->tunggakan);
+                            echo $d->tunggakan;
                             @endphp
                         </td>
                         <td>

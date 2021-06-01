@@ -75,8 +75,11 @@ class laporanController extends Controller
         $data = DB::select("
         select 
             id, 
-            namaSantri as name ,  
-            group_concat(jumlahPerJenis, ' X ', namaTagihan, ' @', FORMAT(jumlah,0), ' = ' , FORMAT(totalPerTagihan ,0), ' ') as tunggakan,
+            namaSantri as name, 
+            REPLACE(concat(
+                '<table><th>Jumlah Tagihan</th><th>Nama Tagihan</th><th>Biaya</th><th>Sub Total</th>',
+                group_concat('<tr><td>',jumlahPerJenis, 'X </td><td>', namaTagihan, '</td><td>', FORMAT(jumlah,0), ' </td><td> ' , FORMAT(totalPerTagihan ,0), '</td></tr>'),
+                '</table>'),'</tr>,<tr>','</tr><tr>') as tunggakan,
             sum(total) as total
         from
         (
