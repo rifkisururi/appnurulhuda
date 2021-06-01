@@ -12,6 +12,10 @@ Route::get('/setup', function () {
     Artisan::call('db:seed');
 });
 
+Route::get('/reset', function () {
+    Artisan::call('migrate:reset');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

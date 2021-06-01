@@ -9,6 +9,8 @@
         <i class="fas fa-plus fa-sm text-white-50"></i> Tambah
     </button>
 </div>
+
+
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <div class="card-body">
         <div class="table-responsive">
@@ -40,29 +42,29 @@
                             ?>
                         </td>
                         <td>
-                           
+
                             @php
                             if ($t->tanggal_bayar == '2021-01-01') {
                             @endphp
-                                <button class="btn btn-info" onclick="action({{$t->id}},1)">Terima Pembayaran</button>
+                            <button class="btn btn-info" onclick="action({{$t->id}},1)">Terima Pembayaran</button>
                             @php
                             }else{
-                                $tgl1 = date('Y-m-d'); // pendefinisian tanggal awal
-                                $tgl2 = date('Y-m-d', strtotime('-3 days', strtotime($tgl1)));
+                            $tgl1 = date('Y-m-d'); // pendefinisian tanggal awal
+                            $tgl2 = date('Y-m-d', strtotime('-3 days', strtotime($tgl1)));
 
-                                if ($t->tanggal_bayar >= $tgl2) {
-                                @endphp
-                                    <button class="btn btn-warning" onclick="action({{$t->id}},0)">batalkan penerimaan</button>
-                                @php
-                                }else{  
-                                @endphp
-                                    <button class='btn btn-success'>Lunas</button>
+                            if ($t->tanggal_bayar >= $tgl2) {
+                            @endphp
+                            <button class="btn btn-warning" onclick="action({{$t->id}},0)">batalkan penerimaan</button>
+                            @php
+                            }else{
+                            @endphp
+                            <button class='btn btn-success'>Lunas</button>
 
-                                @php
-                                }
+                            @php
+                            }
                             }
 
-                            
+
                             @endphp
 
                         </td>
@@ -86,8 +88,8 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Nama Santri</label>
-                        <select class="form-control" name="id_user" required>
+                        <label>Nama Santri</label><br>
+                        <select class="form-control" id="santri" name="id_user" required>
                             <option value="">Pilih Santri</option>
                             @foreach($santri as $s){
                             <option value="{{ $s->id }}">{{ $s->name }}</option>
@@ -97,7 +99,7 @@
                     </div>
                     <div class="form-group">
                         <label>Nama Tagihan</label>
-                        <select class="form-control" name="id_tagihan_master" id="id_tagihan_master" onchange='getNominal()' required>
+                        <select class="form-control" name="id_tagihan_master" id="id_tagihan_master" onchange='getNominal()' required data-live-search="true">
                             <option value="">Pilih Tagihan</option>
                             @foreach($tagihan_master as $tm){
                             <option value="{{ $tm->id }}">{{ $tm->name }}</option>
@@ -128,7 +130,17 @@
     </div>
 </div>
 
+
 <script>
+    $(document).ready(function() {
+        $('#santri').select2({
+            theme: 'bootstrap4',
+            selectOnClose: true,
+            placeholder: "masukan nama santri ...",
+            allowClear: true
+        });
+    });
+
     function getNominal() {
         var id = document.getElementById("id_tagihan_master").value;
         var url = "nominal_tagihan/" + id;
