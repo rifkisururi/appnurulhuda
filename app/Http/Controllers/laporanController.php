@@ -77,7 +77,7 @@ class laporanController extends Controller
         select 
             id, 
             namaSantri as name ,  
-            group_concat(jumlahPerJenis, ' X ', namaTagihan, FORMAT(totalPerTagihan ,0), ' ') as tunggakan,
+            group_concat(jumlahPerJenis, ' X ', namaTagihan, ' ', FORMAT(totalPerTagihan ,0), ' ') as tunggakan,
             sum(total) as total
         from
         (
