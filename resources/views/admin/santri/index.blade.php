@@ -18,6 +18,7 @@
                         <th>Nama</th>
                         <th>Email</th>
                         <th>No Hp</th>
+                        <th>Yayasan</th>
                         <th>Hak Akses</th>
                         <th>Aksi</th>
                     </tr>
@@ -31,6 +32,7 @@
                             {{ $u->no_hp1}} <br>
                             {{ $u->no_hp2}}
                         </td>
+                        <td>{{ $u->namaYayasan}}</td>
                         <td>
                             {{ $u->hakAkses}}                          
                         </td>
@@ -71,6 +73,16 @@
                     <div class="form-group">
                         <label>No Hp Alternatif</label>
                         <input type="text" name="no_hp2" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Yayasan</label>
+                        <select class="form-control" name="id_yayasan" required>
+                            <option value="">Pilih Yayasan</option>
+                            @foreach($yayasan as $y){
+                            <option value="{{ $y->id }}">{{ $y->nama }}</option>
+                            }
+                            @endforeach
+                        </select>
                     </div>
 
                 </div>

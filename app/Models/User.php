@@ -24,6 +24,7 @@ class User extends Authenticatable
         'password',
         'no_hp1',
         'no_hp2',
+        'id_yayasan',
     ];
 
     /**

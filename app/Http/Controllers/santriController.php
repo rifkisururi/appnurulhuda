@@ -16,12 +16,15 @@ class santriController extends Controller
         $santri = DB::table('users')
             ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
             ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
-            ->select('users.*', 'model_has_roles.role_id', 'roles.name as hakAkses')
+            ->join('yayasan', 'yayasan.id', '=', 'users.id_yayasan')
+            ->select('users.*', 'model_has_roles.role_id', 'roles.name as hakAkses', 'yayasan.nama as namaYayasan')
             ->get();
 
         $roles = Role::pluck('name', 'name')->all();
+        $yayasan = DB::table('yayasan')->get();
 
-        return view('admin.santri.index', ['santri' => $santri]);
+
+        return view('admin.santri.index', ['santri' => $santri, 'yayasan' => $yayasan]);
     }
 
     public function store(Request $request)
@@ -32,6 +35,7 @@ class santriController extends Controller
         $add->password = $request->no_hp1;
         $add->no_hp1 = $request->no_hp1;
         $add->no_hp2 = $request->no_hp2;
+        $add->id_yayasan = $request->id_yayasan;
         $add->password = Hash::make('password');
         $add->save();
 

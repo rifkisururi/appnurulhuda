@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('admin@mailnesia.com'),
             'no_hp1' => '6285647451640',
             'no_hp2' => '6285647451640',
+            'id_yayasan' => 1
         ]);
 
         $admin->assignRole('admin');
