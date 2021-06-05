@@ -14,7 +14,8 @@ class tagihanController extends Controller
             DB::table('tagihan_detail')
             ->join('tagihan_master', 'tagihan_master.id', '=', 'tagihan_detail.id_tagihan_master')
             ->join('users', 'users.id', '=', 'tagihan_detail.id_user')
-            ->select('tagihan_master.name', 'tagihan_detail.jumlah', 'users.name as nama_santri', 'tagihan_detail.flag_pay', 'tagihan_detail.id', 'tagihan_detail.jatuh_tempo', 'tagihan_detail.tanggal_bayar')
+            ->join('yayasan', 'yayasan.id', '=', 'users.id_yayasan')
+            ->select('tagihan_master.name', 'yayasan.nama as namaYayasan', 'tagihan_detail.jumlah', 'users.name as nama_santri', 'tagihan_detail.flag_pay', 'tagihan_detail.id', 'tagihan_detail.jatuh_tempo', 'tagihan_detail.tanggal_bayar')
             ->get();
 
         $santri = DB::table('users')->get();
@@ -143,6 +144,34 @@ class tagihanController extends Controller
         }
 
         return $tagihan;
+    }
+
+    public function json_tagihanPerSantri($id, $bulan, $tahun)
+    {
+        if ($bulan == 0 || $tahun == 0) {
+            
+            $tagihan =
+                DB::table('tagihan_detail')
+                ->join('tagihan_master', 'tagihan_master.id', '=', 'tagihan_detail.id_tagihan_master')
+                ->where('tagihan_detail.id_user', '=', $id)
+                ->where('tagihan_detail.flag_pay', '=', 0)
+                ->select('tagihan_master.name', 'tagihan_detail.jumlah', 'tagihan_detail.flag_pay', 'tagihan_detail.id', 'tagihan_detail.jatuh_tempo', 'tagihan_detail.tanggal_bayar')
+                ->get();
+        } else {
+           
+            $query = "
+                select 
+                    td.id, td.jumlah, td.jatuh_tempo, tm.name
+                from 
+                    tagihan_detail td
+                    inner join tagihan_master tm on td.id_tagihan_master = tm.id
+                where year(td.jatuh_tempo) = ".$tahun." and month(td.jatuh_tempo) = ".$bulan." and flag_pay = 0 and td.id_user = ".$id."
+                ";
+                
+                $tagihan = $this->execQuery($query);
+        }
+
+        return response()->json($tagihan);
     }
 
     private function execQuery($query){

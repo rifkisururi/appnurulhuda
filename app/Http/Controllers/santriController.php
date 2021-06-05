@@ -13,12 +13,34 @@ class santriController extends Controller
 {
     public function index()
     {
-        $santri = DB::table('users')
-            ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
-            ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
-            ->join('yayasan', 'yayasan.id', '=', 'users.id_yayasan')
-            ->select('users.*', 'model_has_roles.role_id', 'roles.name as hakAkses', 'yayasan.nama as namaYayasan')
-            ->get();
+        if (isset($_GET['id_yayasan'])) {
+            $id_yayasan = $_GET['id_yayasan'];
+            if($id_yayasan != 0 ){
+                $santri = DB::table('users')
+                    ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+                    ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+                    ->join('yayasan', 'yayasan.id', '=', 'users.id_yayasan')
+                    ->select('users.*', 'model_has_roles.role_id', 'roles.name as hakAkses', 'yayasan.nama as namaYayasan')
+                    ->where('users.id_yayasan','=',$id_yayasan)
+                    ->get();
+            }else {
+                $santri = DB::table('users')
+                    ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+                    ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+                    ->join('yayasan', 'yayasan.id', '=', 'users.id_yayasan')
+                    ->select('users.*', 'model_has_roles.role_id', 'roles.name as hakAkses', 'yayasan.nama as namaYayasan')
+                    ->get();
+            }
+        } else {
+            $santri = DB::table('users')
+                ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+                ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+                ->join('yayasan', 'yayasan.id', '=', 'users.id_yayasan')
+                ->select('users.*', 'model_has_roles.role_id', 'roles.name as hakAkses', 'yayasan.nama as namaYayasan')
+                ->get();
+        }
+
+        
 
         $roles = Role::pluck('name', 'name')->all();
         $yayasan = DB::table('yayasan')->get();

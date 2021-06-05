@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Data Tagihan</h1>
+    <h1 class="h3 mb-0 text-gray-800">Data Tunggakan Pembayaran</h1>
 </div>
 <div class="d-sm-flex align-items-center justify-content-between mb-4" style="overflow-x: auto">
     <div class="card-body">
@@ -11,6 +11,7 @@
                 <thead class="thead-dark">
                     <tr>
                         <th>Nama Santri</th>
+                        <th>Yayasan</th>
                         <th>Tunggakan</th>
                         <th>Total</th>
                         <th>Aksi</th>
@@ -20,6 +21,8 @@
                     @foreach($data as $d)
                     <tr>
                         <td>{{$d->name}}</td>
+                        <td>{{$d->NamaYayasan}}</td>
+                        
                         <td>
                             @php
                             echo $d->tunggakan;

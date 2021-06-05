@@ -41,3 +41,6 @@ Route::get('/laporanTunggakan', [App\Http\Controllers\laporanController::class, 
 
 Route::get('/personalinfo', [App\Http\Controllers\santriController::class, 'personalInfo'])->name('personal-info');
 Route::POST('/personalinfo', [App\Http\Controllers\santriController::class, 'personalInfoUpdate']);
+
+Route::get('/json_tagihanPerSantri', [App\Http\Controllers\tagihanMasterController::class, 'json_tagihanPerSantri'])->name('personal-info');
+

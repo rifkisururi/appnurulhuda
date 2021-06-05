@@ -2,10 +2,37 @@
 @section('content')
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Data Tagihan</h1>
+    <h1 class="h3 mb-0 text-gray-800">Data Kekurangan Pembayaran Tahunan</h1>
 </div>
 <div class="d-sm-flex align-items-center justify-content-between mb-4" style="overflow-x: auto">
     <div class="card-body">
+    <form method="GET">
+            <div class="form-group row">
+                <label for="inputCity" class="col-sm-1">Pilih Yayasan</label>
+                <div class="col-sm-11">
+                    <select class="form-control" name="id_yayasan" required>
+                        <option value="">Pilih Yayasan</option>
+                        <option value="0">Semua Yayasan</option>
+                            @foreach($yayasan as $y){
+                                <option value="{{ $y->id }}">{{ $y->nama }}</option>
+                                }
+                            @endforeach
+                    </select>
+                </div>
+                <label class="col-sm-1">Tahun</label>
+                <div class="col-sm-2">
+                    <select class="form-control" name="tahun" required>
+                        <?php 
+                            for($y = date("Y"); $y >= 2021; $y-- ){
+                                echo "<option value=".$y.">".$y."</option>";
+                            }
+                        ?>
+                    </select>
+                    
+                </div>
+                <button class="btn btn-primary">Filter</button>
+            </div>
+        </form>
         <div class="table-responsive" >
             <table class="table table-bordered table-striped" id="dataTable">
                 <thead class="thead-dark">

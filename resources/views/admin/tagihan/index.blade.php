@@ -19,6 +19,7 @@
                     <tr>
                         <th>Nama Santri</th>
                         <th>Tagihan</th>
+                        <th>Yayasan</th>
                         <th>Nominal</th>
                         <th>Jatuh Tempo</th>
                         <th>Status</th>
@@ -30,6 +31,8 @@
                     <tr>
                         <td>{{ $t->nama_santri}}</td>
                         <td>{{ $t->name}}</td>
+                        <td>{{ $t->namaYayasan}}</td>
+
                         <td> <?php echo number_format($t->jumlah) ?></td>
                         <td>{{ $t->jatuh_tempo}}</td>
                         <td>
@@ -63,7 +66,6 @@
                             @php
                             }
                             }
-
 
                             @endphp
 

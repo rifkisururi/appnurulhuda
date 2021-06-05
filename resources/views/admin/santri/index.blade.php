@@ -3,14 +3,30 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Master Data Santri</h1>
 </div>
-<hr>
-<div class="card-header py-3" align="right">
-    <button type="button" class="d-none d-sm-inline-block btn btn-sm btnprimary shadow-sm" data-toggle="modal" data-target="#exampleModalScrollable">
-        <i class="fas fa-plus fa-sm text-white-50"></i> Tambah
-    </button>
-</div>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    
     <div class="card-body">
+        <form method="GET">
+            <div class="form-group row">
+                <label for="inputCity">Pilih Yayasan</label>
+                <div class="col-sm-6">
+                    <select class="form-control" name="id_yayasan" required>
+                        <option value="">Pilih Yayasan</option>
+                        <option value="0">Semua Yayasan</option>
+                            @foreach($yayasan as $y){
+                                <option value="{{ $y->id }}">{{ $y->nama }}</option>
+                                }
+                            @endforeach
+                    </select>
+                </div>
+                <button class="btn btn-primary">Filter</button>
+            </div>
+        </form>
+        <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#exampleModalScrollable">
+            <i class="fas fa-plus fa-sm text-white-50 "></i> Tambah
+        </button>
+        <br>
+        <br>
         <div class="table-responsive">
             <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                 <thead class="thead-dark">
@@ -94,4 +110,12 @@
         </form>
     </div>
 </div>
+
+<script>
+
+    function hapusFilter()|{
+        window.reload();
+    }
+
+</script>
 @endsection
