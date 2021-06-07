@@ -21,8 +21,6 @@ class tagihanMasterController extends Controller
         group by tm.id, tm.name , tm.jumlah, tm.keterangan  "
         );
 
-
-
         return view('admin.tagihanMaster.index', [
             'tagihan_master' => $tagihan_master,
         ]);

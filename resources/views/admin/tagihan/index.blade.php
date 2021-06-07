@@ -111,11 +111,12 @@
                     </div>
                     <div class="form-group">
                         <label>Jumlah</label>
-                        <td><input type="text" class="form-control" name="jumlah" id="jumlah"> </td>
+                        <input type="text" class="form-control" id="jumlah" disabled>
+                        <input type="text" class="form-control" hidden name="jumlah" id="jumlah2">
                     </div>
                     <div class="form-group">
                         <label>Jatuh Tempo</label>
-                        <td><input type="date" class="form-control" name="jatuhtempo"> </td>
+                        <input type="date" class="form-control" name="jatuhtempo">
                     </div>
                     <div class="form-group">
                         <label style="color: red;">Setelah tekan tombol "Simpan", orang tua/ Wali santri akan mendapat notifkasi tagihan melalui Whatsapp</label>
@@ -149,6 +150,7 @@
         $.get(url, function(data) {
             console.log(data.data.jumlah);
             document.getElementById("jumlah").value = data.data.jumlah;
+            document.getElementById("jumlah2").value = data.data.jumlah;
 
         });
     }

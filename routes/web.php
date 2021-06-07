@@ -44,3 +44,6 @@ Route::POST('/personalinfo', [App\Http\Controllers\santriController::class, 'per
 
 Route::get('/json_tagihanPerSantri', [App\Http\Controllers\tagihanMasterController::class, 'json_tagihanPerSantri'])->name('personal-info');
 
+Route::get('/yayasan', [App\Http\Controllers\yayasan_controller::class, 'index'])->name('yayasan');
+Route::POST('/yayasan', [App\Http\Controllers\yayasan_controller::class, 'store']);
+Route::PUT('/yayasan', [App\Http\Controllers\yayasan_controller::class, 'edit']);

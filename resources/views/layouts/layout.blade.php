@@ -60,6 +60,7 @@
                 <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('santri') }}"> Data Santri</a>
+                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('yayasan') }}"> Data Yayasan</a>
                         <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('tagihan-master') }}"> Data Tagihan</a>
                     </div>
                 </div>
