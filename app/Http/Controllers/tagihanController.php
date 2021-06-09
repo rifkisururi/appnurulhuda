@@ -113,6 +113,31 @@ class tagihanController extends Controller
 
         $add->save();
 
+        $no_hp1 =
+            DB::table('users')
+            ->where('id', '=', $request->id_user)
+            ->value('no_hp1');
+
+        $no_hp2 =
+            DB::table('users')
+            ->where('id', '=', $request->id_user)
+            ->value('no_hp2');
+
+        $name =
+            DB::table('users')
+            ->where('id', '=', $request->id_user)
+            ->value('name');
+
+        $nameTagihan =
+            DB::table('tagihan_master')
+            ->where('id', '=', $request->id_tagihan_master)
+            ->value('name');
+
+        $kata = "Assalamu'alaikum Bpk/Ibu $name,<br>Terdapat Iuran $nameTagihan sejumlah $request->jumlah jatuh tempo pada $request->jatuhtempo<br> Mohon kerjasamnanya membayar tepat waktu.<br><br>Matur suwun";
+
+        $this->sendWA($no_hp1, $kata);
+        $this->sendWA($no_hp2, $kata);
+
         return redirect('tagihan');
     }
 
@@ -139,7 +164,6 @@ class tagihanController extends Controller
                     inner join tagihan_master tm on td.id_tagihan_master = tm.id
                 where year(td.jatuh_tempo) = " . $tahun . " and month(td.jatuh_tempo) = " . $bulan . " and flag_pay = 0 and td.id_user = " . $id . "
                 ";
-
             $tagihan = $this->execQuery($query);
         }
 
@@ -183,12 +207,13 @@ class tagihanController extends Controller
 
     public function kirimPesan()
     {
-        $this->sendWA('62895401665951','Tagihan Sahriah 10.000 jatuh tempo 2021-06-10 <br>Matur suwun');
-        $this->sendWA('6289691965577','Tagihan Sahriah 10.000 jatuh tempo 2021-06-10 <br>Matur suwun');
+        $this->sendWA('62895401665951', 'Tagihan Sahriah 10.000 jatuh tempo 2021-06-10 <br>Matur suwun');
+        $this->sendWA('6289691965577', 'Tagihan Sahriah 10.000 jatuh tempo 2021-06-10 <br>Matur suwun');
     }
 
-    private function sendWA($d, $isiPesan){
-        $sender = "6285647451640";
+    private function sendWA($d, $isiPesan)
+    {
+        $sender = env("SENDER_WA");
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://whapi.io/api/send",

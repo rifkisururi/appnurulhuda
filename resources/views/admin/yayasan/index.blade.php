@@ -42,9 +42,6 @@
                             echo "<button class='btn btn-danger' onclick='hapus({{ $y->id}})'>Hapus</button>";
                             }
                             @endphp
-
-
-
                         </td>
                     </tr>
                     @endforeach
