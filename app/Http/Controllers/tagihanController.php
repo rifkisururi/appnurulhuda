@@ -98,6 +98,23 @@ class tagihanController extends Controller
         ]);
     }
 
+    public function vw_tagihan($password)
+    {
+        $id = $_GET['id'];
+
+        $tagihan = $this->tagihanPerSantri($id, $bulan, $tahun);
+
+        $namaSantri =
+            DB::table('users')
+            ->where('id', '=', $id)
+            ->value('name');
+
+        return view('admin.tagihan.persantri', [
+            'tagihan' => $tagihan,
+            'namaSantri' => $namaSantri
+        ]);
+    }
+
 
     public function store(Request $request)
     {
@@ -207,8 +224,8 @@ class tagihanController extends Controller
 
     public function kirimPesan()
     {
-        $this->sendWA('62895401665951', 'Tagihan Sahriah 10.000 jatuh tempo 2021-06-10 <br>Matur suwun');
-        $this->sendWA('6289691965577', 'Tagihan Sahriah 10.000 jatuh tempo 2021-06-10 <br>Matur suwun');
+        $this->sendWA('62895401665951', 'ini adalah sebuat test, mohon abaikan aja<br>Tagihan Sahriah 10.000 jatuh tempo 2021-06-10 <br>Matur suwun');
+        $this->sendWA('6289691965577', 'ini adalah sebuat test, mohon abaikan aja<br>Tagihan Sahriah 10.000 jatuh tempo 2021-06-10 <br>Matur suwun');
     }
 
     private function sendWA($d, $isiPesan)

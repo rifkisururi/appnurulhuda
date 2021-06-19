@@ -29,6 +29,7 @@ Route::get('/nominal_tagihan/{id}', [App\Http\Controllers\tagihanController::cla
 
 Route::get('/tagihanMaster', [App\Http\Controllers\tagihanMasterController::class, 'index'])->name('tagihan-master');
 Route::POST('/tagihanMaster', [App\Http\Controllers\tagihanMasterController::class, 'store'])->name('tagihanMaster-post');
+Route::PUT('/tagihanMaster', [App\Http\Controllers\tagihanMasterController::class, 'update'])->name('tagihanMaster-put');
 Route::get('/tagihanMasterHapus/{id}', [App\Http\Controllers\tagihanMasterController::class, 'destroy']);
 
 Route::get('/santri', [App\Http\Controllers\santriController::class, 'index'])->name('santri');

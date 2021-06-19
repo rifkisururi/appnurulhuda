@@ -36,6 +36,16 @@ class tagihanMasterController extends Controller
 
         return redirect('tagihanMaster');
     }
+    public function update(Request $request)
+    {
+        $add = tagihan_master_model::findOrFail($request->id);
+        $add->name = $request->name;
+        $add->keterangan = $request->keterangan;
+        $add->jumlah = $request->jumlah;
+        $add->save();
+
+        return redirect('tagihanMaster');
+    }
 
     public function destroy($id)
     {
