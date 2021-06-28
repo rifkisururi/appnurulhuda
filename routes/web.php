@@ -12,6 +12,10 @@ Route::get('/setup', function () {
     Artisan::call('db:seed');
 });
 
+Route::get('/job', function () {
+    Artisan::call('queue:work');
+});
+
 Route::get('/reset', function () {
     Artisan::call('migrate:reset');
 });

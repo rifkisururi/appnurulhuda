@@ -64,7 +64,9 @@
                                         <td>
                                             <a href="user/ubahAkses/{{ $u->id}}"><button class="btn btn-warning ">Ubah Akses</button></a>
                                             <a href="user/ubahAkses/{{ $u->id}}"><button class="btn btn-primary ">Edit Data</button></a>
-                                            <!-- <button type="button" class="btb btn-sm btn-warning" data-toggle="modal" data-target="#editData" onclick="({{$u->id}})">Ubah Data</button> -->
+                                            <button onclick="edit({{$u->id}},'{{$u->name}}','{{$u->email}}','{{$u->no_hp1}}','{{$u->no_hp2}}',{{$u->id_yayasan}},{{$u->role_id}})" type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalEdit">
+                                                <i class=""></i> Edit
+                                            </button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -124,6 +126,49 @@
                 </div>
         </div>
         </form>
+    </div>
+</div>
+
+<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" ariahidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modaltitle" id="exampleModalScrollableTitle">Update Data Santri</h5>
+                <button type="button" class="close" data-dismiss="modal" arialabel="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ route('tagihanMaster-put') }}" method="POST">
+                @csrf
+                <input type="hidden" name="_method" value="PUT">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label>Nama Santri</label>
+                        <td><input type="text" class="form-control" id="nama" name="name" required> </td>
+                        <td><input type="text" class="form-control" id="id" name="id" hidden> </td>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <td><input type="email" class="form-control" id="email" name="email" required> </td>
+                    </div>
+                    <div class="form-group">
+                        <label>No HP</label>
+                        <td><input type="text" class="form-control" id="hp1" name="hp1" required> </td>
+                    </div>
+                    <div class="form-group">
+                        <label>No HP Alternatif</label>
+                        <td><input type="text" class="form-control" id="hp2" name="hp2" required> </td>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" datadismiss="modal"> Batal</button>
+                    <input type="submit" class="btn btn-primary btn-send" value="Simpan">
+                </div>
+            </form>
+        </div>
+
     </div>
 </div>
 
