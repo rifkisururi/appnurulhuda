@@ -6,34 +6,34 @@
 </div>
 <div class="d-sm-flex align-items-center justify-content-between mb-4" style="overflow-x: auto">
     <div class="card-body">
-    <form method="GET">
+        <form method="GET">
             <div class="form-group row">
                 <label for="inputCity" class="col-sm-1">Pilih Yayasan</label>
                 <div class="col-sm-11">
                     <select class="form-control" name="id_yayasan" required>
                         <option value="">Pilih Yayasan</option>
                         <option value="0">Semua Yayasan</option>
-                            @foreach($yayasan as $y){
-                                <option value="{{ $y->id }}">{{ $y->nama }}</option>
-                                }
-                            @endforeach
+                        @foreach($yayasan as $y){
+                        <option value="{{ $y->id }}">{{ $y->nama }}</option>
+                        }
+                        @endforeach
                     </select>
                 </div>
                 <label class="col-sm-1">Tahun</label>
                 <div class="col-sm-2">
                     <select class="form-control" name="tahun" required>
-                        <?php 
-                            for($y = date("Y"); $y >= 2021; $y-- ){
-                                echo "<option value=".$y.">".$y."</option>";
-                            }
+                        <?php
+                        for ($y = date("Y"); $y >= 2021; $y--) {
+                            echo "<option value=" . $y . ">" . $y . "</option>";
+                        }
                         ?>
                     </select>
-                    
+
                 </div>
                 <button class="btn btn-primary">Filter</button>
             </div>
         </form>
-        <div class="table-responsive" >
+        <div class="table-responsive">
             <table class="table table-bordered table-striped" id="dataTable">
                 <thead class="thead-dark">
                     <tr>
@@ -53,143 +53,144 @@
                     </tr>
                 </thead>
                 <tbody>
-                @php $year = 2021; @endphp 
-                @foreach($data as $d)
+                    @php $year = 2021; @endphp
+                    @foreach($data as $d)
                     <tr>
                         <td>{{$d->name}}</td>
                         <td>
                             @php
-                                $sisa = $d->tagihan1-$d->pembayaran1;
-                                if($sisa == 0){
-                                    echo "<button class='btn btn-info btn-sm'>Lunas</button>";
-                                }else{
-                                    echo "<button onclick='gantiID($d->id,1,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
-                                }
-                            @endphp                            
+                            $sisa = $d->tagihan1-$d->pembayaran1;
+                            if($sisa == 0){
+                            echo "<button class='btn btn-info btn-sm'>Lunas</button>";
+                            }else{
+                            echo "<button onclick='gantiID($d->id,1,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
+                            }
+                            @endphp
                         </td>
-                        
+
                         <td>
                             @php
-                                $sisa = $d->tagihan2-$d->pembayaran2;
-                                if($sisa == 0){
-                                    echo "<button class='btn btn-info btn-sm'>Lunas</button>";
-                                }else{
-                                    echo "<button onclick='gantiID($d->id,2,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
-                                }
-                            @endphp                            
+                            $sisa = $d->tagihan2-$d->pembayaran2;
+                            if($sisa == 0){
+                            echo "<button class='btn btn-info btn-sm'>Lunas</button>";
+                            }else{
+                            echo "<button onclick='gantiID($d->id,2,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
+                            }
+                            @endphp
                         </td>
-                        
+
                         <td>
                             @php
-                                $sisa = $d->tagihan3-$d->pembayaran3;
-                                if($sisa == 0){
-                                    echo "<button class='btn btn-info btn-sm'>Lunas</button>";
-                                }else{
-                                    echo "<button onclick='gantiID($d->id,3,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
-                                }
-                            @endphp                            
+                            $sisa = $d->tagihan3-$d->pembayaran3;
+                            if($sisa == 0){
+                            echo "<button class='btn btn-info btn-sm'>Lunas</button>";
+                            }else{
+                            echo "<button onclick='gantiID($d->id,3,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
+                            }
+                            @endphp
                         </td>
-                        
+
                         <td>
                             @php
-                                $sisa = $d->tagihan4-$d->pembayaran4;
-                                if($sisa == 0){
-                                    echo "<button class='btn btn-info btn-sm'>Lunas</button>";
-                                }else{
-                                    echo "<button onclick='gantiID($d->id,4,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
-                                }
-                            @endphp                            
+                            $sisa = $d->tagihan4-$d->pembayaran4;
+                            if($sisa == 0){
+                            echo "<button class='btn btn-info btn-sm'>Lunas</button>";
+                            }else{
+                            echo "<button onclick='gantiID($d->id,4,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
+                            }
+                            @endphp
                         </td>
-                        
+
                         <td>
                             @php
-                                $sisa = $d->tagihan5-$d->pembayaran5;
-                                if($sisa == 0){
-                                    echo "<button class='btn btn-info btn-sm'>Lunas</button>";
-                                }else{
-                                    echo "<button onclick='gantiID($d->id,5,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
-                                }
-                            @endphp                            
-                        </td>
-                        <td>
-                            @php
-                                $sisa = $d->tagihan6-$d->pembayaran6;
-                                if($sisa == 0){
-                                    echo "<button class='btn btn-info btn-sm'>Lunas</button>";
-                                }else{
-                                    echo "<button onclick='gantiID($d->id,6,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
-                                }
-                            @endphp                            
+                            $sisa = $d->tagihan5-$d->pembayaran5;
+                            if($sisa == 0){
+                            echo "<button class='btn btn-info btn-sm'>Lunas</button>";
+                            }else{
+                            echo "<button onclick='gantiID($d->id,5,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
+                            }
+                            @endphp
                         </td>
                         <td>
                             @php
-                                $sisa = $d->tagihan7-$d->pembayaran7;
-                                if($sisa == 0){
-                                    echo "<button class='btn btn-info btn-sm'>Lunas</button>";
-                                }else{
-                                    echo "<button onclick='gantiID($d->id,7,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
-                                }
-                            @endphp                            
+                            $sisa = $d->tagihan6-$d->pembayaran6;
+                            if($sisa == 0){
+                            echo "<button class='btn btn-info btn-sm'>Lunas</button>";
+                            }else{
+                            echo "<button onclick='gantiID($d->id,6,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
+                            }
+                            @endphp
                         </td>
-                        
                         <td>
                             @php
-                                $sisa = $d->tagihan8-$d->pembayaran8;
-                                if($sisa == 0){
-                                    echo "<button class='btn btn-info btn-sm'>Lunas</button>";
-                                }else{
-                                    echo "<button onclick='gantiID($d->id,8,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
-                                }
-                            @endphp                            
+                            $sisa = $d->tagihan7-$d->pembayaran7;
+
+                            if($sisa == 0){
+                            echo "<button class='btn btn-info btn-sm'>Lunas</button>";
+                            }else{
+                            echo "<button onclick='gantiID($d->id,7,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($d->tagihan7)."</button>";
+                            }
+                            @endphp
                         </td>
-                        
+
                         <td>
                             @php
-                                $sisa = $d->tagihan9-$d->pembayaran9;
-                                if($sisa == 0){
-                                    echo "<button class='btn btn-info btn-sm'>Lunas</button>";
-                                }else{
-                                    echo "<button onclick='gantiID($d->id,9,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
-                                }
-                            @endphp                            
+                            $sisa = $d->tagihan8-$d->pembayaran8;
+                            if($sisa == 0){
+                            echo "<button class='btn btn-info btn-sm'>Lunas</button>";
+                            }else{
+                            echo "<button onclick='gantiID($d->id,8,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
+                            }
+                            @endphp
                         </td>
-                        
+
                         <td>
                             @php
-                                $sisa = $d->tagihan10-$d->pembayaran10;
-                                if($sisa == 0){
-                                    echo "<button class='btn btn-info btn-sm'>Lunas</button>";
-                                }else{
-                                    echo "<button onclick='gantiID($d->id,10,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
-                                }
-                            @endphp                            
+                            $sisa = $d->tagihan9-$d->pembayaran9;
+                            if($sisa == 0){
+                            echo "<button class='btn btn-info btn-sm'>Lunas</button>";
+                            }else{
+                            echo "<button onclick='gantiID($d->id,9,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
+                            }
+                            @endphp
                         </td>
-                        
+
                         <td>
                             @php
-                                $sisa = $d->tagihan11-$d->pembayaran11;
-                                if($sisa == 0){
-                                    echo "<button class='btn btn-info btn-sm'>Lunas</button>";
-                                }else{
-                                    echo "<button onclick='gantiID($d->id,11,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
-                                }
-                            @endphp                            
+                            $sisa = $d->tagihan10-$d->pembayaran10;
+                            if($sisa == 0){
+                            echo "<button class='btn btn-info btn-sm'>Lunas</button>";
+                            }else{
+                            echo "<button onclick='gantiID($d->id,10,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
+                            }
+                            @endphp
                         </td>
-                        
+
                         <td>
                             @php
-                                $sisa = $d->tagihan12-$d->pembayaran12;
-                                if($sisa == 0){
-                                    echo "<button class='btn btn-info btn-sm'>Lunas</button>";
-                                }else{
-                                    echo "<button onclick='gantiID($d->id,12,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
-                                }
-                            @endphp                            
+                            $sisa = $d->tagihan11-$d->pembayaran11;
+                            if($sisa == 0){
+                            echo "<button class='btn btn-info btn-sm'>Lunas</button>";
+                            }else{
+                            echo "<button onclick='gantiID($d->id,11,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
+                            }
+                            @endphp
                         </td>
-                        
+
+                        <td>
+                            @php
+                            $sisa = $d->tagihan12-$d->pembayaran12;
+                            if($sisa == 0){
+                            echo "<button class='btn btn-info btn-sm'>Lunas</button>";
+                            }else{
+                            echo "<button onclick='gantiID($d->id,12,$year)' type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal'>".number_format($sisa)."</button>";
+                            }
+                            @endphp
+                        </td>
+
                     </tr>
 
-                @endforeach
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -220,7 +221,7 @@
 </div>
 <script>
     function gantiID(id, bulan, tahun) {
-        var url = "tagihanSantri?id=" + id+"&bulan="+bulan+"&tahun="+tahun;
+        var url = "tagihanSantri?id=" + id + "&bulan=" + bulan + "&tahun=" + tahun;
         document.getElementById('iframe').src = url;
     }
 </script>

@@ -207,8 +207,8 @@ class tagihanController extends Controller
 
     public function kirimPesan()
     {
-        $this->sendWA('62895401665951', 'Tagihan Sahriah 10.000 jatuh tempo 2021-06-10 <br>Matur suwun');
-        $this->sendWA('6289691965577', 'Tagihan Sahriah 10.000 jatuh tempo 2021-06-10 <br>Matur suwun');
+        $this->sendWA('62895401665951', 'Tagihan Sahriah 10.000 jatuh tempo 2021-06-10 <br>Matur suwun<br><br>Ini hanya uji coba, abaikan saja ');
+        //$this->sendWA('6289691965577', 'Tagihan Sahriah 10.000 jatuh tempo 2021-06-10 <br>Matur suwun<br><br>Ini hanya uji coba, abaikan saja ');
     }
 
     private function sendWA($d, $isiPesan)
@@ -233,5 +233,6 @@ class tagihanController extends Controller
 
         $response = curl_exec($curl);
         curl_close($curl);
+        echo $response;
     }
 }

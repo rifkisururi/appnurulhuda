@@ -11,80 +11,55 @@ class laporanController extends Controller
     {
         if (isset($_GET['tahun'])) {
             $tahun = $_GET['tahun'];
-        }else{
+        } else {
             $tahun = date("Y");
         }
 
         if (isset($_GET['id_yayasan'])) {
             $id_yayasan = $_GET['id_yayasan'];
-        }else{
+        } else {
             $id_yayasan = 0;
         }
 
-        if($id_yayasan != 0){
+        if ($id_yayasan != 0) {
             $fiterYayasan = " and y.id = $id_yayasan";
         } else {
             $fiterYayasan = "";
-        }  
+        }
 
 
         $data = DB::select("
         select * from (
             select 
-                u.id, u.name, y.id as id_yayasan, y.nama as nama_yayasan,
-                IFNULL(sum(tg1.jumlah),0)  as tagihan1, IFNULL(sum(tg1b.jumlah),0) as pembayaran1,
-                IFNULL(sum(tg2.jumlah),0)  as tagihan2, IFNULL(sum(tg2b.jumlah),0) as pembayaran2,
-                IFNULL(sum(tg3.jumlah),0)  as tagihan3, IFNULL(sum(tg3b.jumlah),0) as pembayaran3,
-                IFNULL(sum(tg4.jumlah),0)  as tagihan4, IFNULL(sum(tg4b.jumlah),0) as pembayaran4,
-                IFNULL(sum(tg5.jumlah),0)  as tagihan5, IFNULL(sum(tg5b.jumlah),0) as pembayaran5,
-                IFNULL(sum(tg6.jumlah),0)  as tagihan6, IFNULL(sum(tg6b.jumlah),0) as pembayaran6,
-                IFNULL(sum(tg7.jumlah),0)  as tagihan7, IFNULL(sum(tg7b.jumlah),0) as pembayaran7,
-                IFNULL(sum(tg8.jumlah),0)  as tagihan8, IFNULL(sum(tg8b.jumlah),0) as pembayaran8,
-                IFNULL(sum(tg9.jumlah),0)  as tagihan9, IFNULL(sum(tg9b.jumlah),0) as pembayaran9,
-                IFNULL(sum(tg10.jumlah),0)  as tagihan10, IFNULL(sum(tg10b.jumlah),0) as pembayaran10,
-                IFNULL(sum(tg11.jumlah),0)  as tagihan11, IFNULL(sum(tg11b.jumlah),0) as pembayaran11,
-                IFNULL(sum(tg12.jumlah),0) as tagihan12, IFNULL(sum(tg12b.jumlah),0) as pembayaran12
-            from 
-                users u
-                inner join yayasan y on u.id_yayasan = y.id $fiterYayasan
-
-                left join tagihan_detail tg1 on u.id = tg1.id_user and month(tg1.jatuh_tempo) = 1 and year(tg1.jatuh_tempo) = $tahun
-                left join tagihan_detail tg1b on u.id = tg1b.id_user and month(tg1b.jatuh_tempo) = 1 and tg1b.flag_pay = 1 and year(tg1b.jatuh_tempo) = $tahun
-                
-                left join tagihan_detail tg2 on u.id = tg2.id_user and month(tg2.jatuh_tempo) = 2 and year(tg2.jatuh_tempo) = $tahun
-                left join tagihan_detail tg2b on u.id = tg2b.id_user and month(tg2b.jatuh_tempo) = 2 and tg2b.flag_pay = 1 and year(tg2b.jatuh_tempo) = $tahun 
-                
-                left join tagihan_detail tg3 on u.id = tg3.id_user and month(tg3.jatuh_tempo) = 3 and year(tg3.jatuh_tempo) = $tahun
-                left join tagihan_detail tg3b on u.id = tg3b.id_user and month(tg3b.jatuh_tempo) = 3 and tg3b.flag_pay = 1 and year(tg3b.jatuh_tempo) = $tahun 
-                
-                left join tagihan_detail tg4 on u.id = tg4.id_user and month(tg4.jatuh_tempo) = 4 and year(tg4.jatuh_tempo) = $tahun
-                left join tagihan_detail tg4b on u.id = tg4b.id_user and month(tg4b.jatuh_tempo) = 4 and tg4b.flag_pay = 1 and year(tg4b.jatuh_tempo) = $tahun
-                
-                left join tagihan_detail tg5 on u.id = tg5.id_user and month(tg5.jatuh_tempo) = 5 and year(tg5.jatuh_tempo) = $tahun
-                left join tagihan_detail tg5b on u.id = tg5b.id_user and month(tg5b.jatuh_tempo) = 5 and tg5b.flag_pay = 1 and year(tg5b.jatuh_tempo) = $tahun 
-                
-                left join tagihan_detail tg6 on u.id = tg6.id_user and month(tg6.jatuh_tempo) = 6 and year(tg6.jatuh_tempo) = $tahun
-                left join tagihan_detail tg6b on u.id = tg6b.id_user and month(tg6b.jatuh_tempo) = 6 and tg6b.flag_pay = 1 and year(tg6b.jatuh_tempo) = $tahun 
-                
-                left join tagihan_detail tg7 on u.id = tg7.id_user and month(tg7.jatuh_tempo) = 7 and year(tg7.jatuh_tempo) = $tahun
-                left join tagihan_detail tg7b on u.id = tg7b.id_user and month(tg7b.jatuh_tempo) = 7 and tg7b.flag_pay = 1 and year(tg7b.jatuh_tempo) = $tahun 
-                
-                left join tagihan_detail tg8 on u.id = tg8.id_user and month(tg8.jatuh_tempo) = 8 and year(tg8.jatuh_tempo) = $tahun
-                left join tagihan_detail tg8b on u.id = tg8b.id_user and month(tg8b.jatuh_tempo) = 8 and tg8b.flag_pay = 1 and year(tg8b.jatuh_tempo) = $tahun
-                
-                left join tagihan_detail tg9 on u.id = tg9.id_user and month(tg9.jatuh_tempo) = 9 and year(tg9.jatuh_tempo) = $tahun
-                left join tagihan_detail tg9b on u.id = tg9b.id_user and month(tg9b.jatuh_tempo) =9 and tg9b.flag_pay = 1 and year(tg9b.jatuh_tempo) = $tahun 
-                
-                left join tagihan_detail tg10 on u.id = tg10.id_user and month(tg10.jatuh_tempo) = 10 and year(tg10.jatuh_tempo) = $tahun
-                left join tagihan_detail tg10b on u.id = tg10b.id_user and month(tg10b.jatuh_tempo) = 10 and tg10b.flag_pay = 1 and year(tg10b.jatuh_tempo) = $tahun 
-                
-                left join tagihan_detail tg11 on u.id = tg11.id_user and month(tg11.jatuh_tempo) = 11 and year(tg11.jatuh_tempo) = $tahun
-                left join tagihan_detail tg11b on u.id = tg11b.id_user and month(tg11b.jatuh_tempo) = 11 and tg11b.flag_pay = 1 and year(tg11b.jatuh_tempo) = $tahun 
-                
-                left join tagihan_detail tg12 on u.id = tg12.id_user and month(tg12.jatuh_tempo) = 12 and year(tg12.jatuh_tempo) = $tahun
-                left join tagihan_detail tg12b on u.id = tg12b.id_user and month(tg12b.jatuh_tempo) = 12 and tg12b.flag_pay = 1 and year(tg12b.jatuh_tempo) = $tahun 
-            GROUP BY 
-                u.id, u.name, y.id , y.nama , u.id_yayasan
+				u.id,u.name,y.id as id_yayasan, 
+				y.nama as nama_yayasan
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 1 and year(td.jatuh_tempo) = $tahun) as tagihan1
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 2 and year(td.jatuh_tempo) = $tahun) as tagihan2
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 3 and year(td.jatuh_tempo) = $tahun) as tagihan3
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 4 and year(td.jatuh_tempo) = $tahun) as tagihan4
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 5 and year(td.jatuh_tempo) = $tahun) as tagihan5
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 6 and year(td.jatuh_tempo) = $tahun) as tagihan6
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 7 and year(td.jatuh_tempo) = $tahun) as tagihan7
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 8 and year(td.jatuh_tempo) = $tahun) as tagihan8
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 9 and year(td.jatuh_tempo) = $tahun) as tagihan9
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 10 and year(td.jatuh_tempo) = $tahun) as tagihan10
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 11 and year(td.jatuh_tempo) = $tahun) as tagihan11
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 12 and year(td.jatuh_tempo) = $tahun) as tagihan12
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 1 and year(td.jatuh_tempo) = $tahun and td.flag_pay = 1) as pembayaran1
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 2 and year(td.jatuh_tempo) = $tahun and td.flag_pay = 1) as pembayaran2
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 3 and year(td.jatuh_tempo) = $tahun and td.flag_pay = 1) as pembayaran3
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 4 and year(td.jatuh_tempo) = $tahun and td.flag_pay = 1) as pembayaran4
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 5 and year(td.jatuh_tempo) = $tahun and td.flag_pay = 1) as pembayaran5
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 6 and year(td.jatuh_tempo) = $tahun and td.flag_pay = 1) as pembayaran6
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 7 and year(td.jatuh_tempo) = $tahun and td.flag_pay = 1) as pembayaran7
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 8 and year(td.jatuh_tempo) = $tahun and td.flag_pay = 1) as pembayaran8
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 9 and year(td.jatuh_tempo) = $tahun and td.flag_pay = 1) as pembayaran9
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 10 and year(td.jatuh_tempo) = $tahun and td.flag_pay = 1) as pembayaran10
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 11 and year(td.jatuh_tempo) = $tahun and td.flag_pay = 1) as pembayaran11
+				,(select IFNULL(sum(td.jumlah),0) from tagihan_detail td where td.id_user = u.id and month(td.jatuh_tempo) = 12 and year(td.jatuh_tempo) = $tahun and td.flag_pay = 1) as pembayaran12
+			from 
+				users u
+				INNER JOIN yayasan y on y.id = u.id_yayasan
             ) a 
         where 
             a.tagihan1 - a.pembayaran1 != 0 or
@@ -100,9 +75,8 @@ class laporanController extends Controller
             a.tagihan11 - a.pembayaran11 != 0 or
             a.tagihan12 - a.pembayaran12 != 0 
             ");
-
         $yayasan = DB::table('yayasan')->get();
-        
+
 
         return view('admin.laporan.tahunan', [
             'data' => $data,
