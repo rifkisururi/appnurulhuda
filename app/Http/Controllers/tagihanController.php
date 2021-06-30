@@ -232,6 +232,7 @@ class tagihanController extends Controller
         ));
 
         $response = curl_exec($curl);
+        echo $response;
         curl_close($curl);
         echo $response;
     }
