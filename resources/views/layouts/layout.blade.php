@@ -32,7 +32,8 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
                 <div class="sidebar-brand-icon rotate-n-0">
-                    <img src="{{asset('asset/img/logo_ubsi.png')}}" width="60">
+                    <!-- <img src="{{asset('asset/img/logo_ubsi.png')}}" width="60"> -->
+                    <img src="https://nusamandiri.info/wp-content/uploads/2020/07/logo-universitas-nusa-mandiri.png" width="60">
                 </div>
                 <div class="sidebar-brand-text mx-2">Sistem Internal</div>
             </a>
