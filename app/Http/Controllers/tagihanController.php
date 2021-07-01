@@ -244,4 +244,28 @@ class tagihanController extends Controller
         echo $response;
     }
 
+    public function blast(){
+
+        $kata = "*_TPQ NURUL HUDA_*<br>
+        ɴɢαreɴαɴ ɢeɴιтo wιɴdυѕαrι<br>
+        Assalamualaikum Wr. Wb.<br>
+        <br>
+        Kpd. Yth.<br>
+        Wali Santri <br>
+        Di Kediaman <br>
+        Assalamu'alaikum Wr. Wb.<br>
+        <br>
+        Kami dari TPQ Nurul Huda Ngarenan<br>
+        Memberitahukan bahwa:<br>
+        1.	Mulai bulan ini (Juli 2021) Syahriah TPQ akan di ingtakan melalui pesan WA dan nomor resmi ini.<br>
+        2.	Melalui nomor ini akan dsampaikan info-info kegiatan resmi dari TPQ Nurul Huda.<br>
+        3.	 Mohon di simpan dan jangan di blokir.<br>
+        4.	Wali santri akan mendapatkan pemberitahuan selama putra-putri mengaji ni Nurul Huda<br>
+        5.	Pada tanggal 10 dan 15 disetiap bulannya aka ada pemberitahuan.<br>
+        6.	Apabila nomor wali santri ganti. Harap memberitahu pengurus TPQ.<br>
+        7.	Apabila suatu saat putra-putri / wali santri sudah membayar dan masih ada pesan tagihan harap konformasi dan klarifikasi ke Pengurus TPQ.<br>
+        Demikian kami sampaikan, terimakasih<br>
+        Wassalamu'alaikum Wr. Wb.";
+
+    }
 }
