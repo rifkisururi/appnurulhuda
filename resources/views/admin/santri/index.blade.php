@@ -4,7 +4,7 @@
     <h1 class="h3 mb-0 text-gray-800">Master Data Santri</h1>
 </div>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    
+
     <div class="card-body">
         <form method="GET">
             <div class="form-group row">
@@ -13,10 +13,10 @@
                     <select class="form-control" name="id_yayasan" required>
                         <option value="">Pilih Yayasan</option>
                         <option value="0">Semua Yayasan</option>
-                            @foreach($yayasan as $y){
-                                <option value="{{ $y->id }}">{{ $y->nama }}</option>
-                                }
-                            @endforeach
+                        @foreach($yayasan as $y){
+                        <option value="{{ $y->id }}">{{ $y->nama }}</option>
+                        }
+                        @endforeach
                     </select>
                 </div>
                 <button class="btn btn-primary">Filter</button>
@@ -50,10 +50,13 @@
                         </td>
                         <td>{{ $u->namaYayasan}}</td>
                         <td>
-                            {{ $u->hakAkses}}                          
+                            {{ $u->hakAkses}}
                         </td>
                         <td>
-                            <a href="user/ubahAkses/{{ $u->id}}"><button class="btn btn-warning btn-sm">Ubah Akses</button></a>                     
+                            <a href="user/ubahAkses/{{ $u->id}}"><button class="btn btn-warning btn-sm">Ubah Akses</button></a>
+                            <button onclick="edit('{{$u->id}}','{{ $u->name}}','{{ $u->email}}','{{ $u->no_hp1}}','{{ $u->no_hp2}}')" type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalEdit">
+                                Edit
+                            </button>
                         </td>
                     </tr>
                     @endforeach
@@ -111,11 +114,70 @@
     </div>
 </div>
 
-<script>
+<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" ariahidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modaltitle" id="exampleModalScrollableTitle">Edit Data Santri</h5>
+                <button type="button" class="close" data-dismiss="modal" arialabel="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ route('santri-post') }}" method="POST">
+                @csrf
+                <input type="hidden" name="_method" value="PUT">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Nama</label>
+                        <input type="text" name="name" id="nama" class="form-control">
+                        <input type="number" name="id" id="idSantri" class="form-control" hidden>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" id="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>No Hp</label>
+                        <input type="text" name="no_hp1" id="no_hp1" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>No Hp Alternatif</label>
+                        <input type="text" name="no_hp2" id="no_hp2" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Yayasan</label>
+                        <select class="form-control" name="id_yayasan" id="yayasan" required>
+                            <option value="">Pilih Yayasan</option>
+                            @foreach($yayasan as $y){
+                            <option value="{{ $y->id }}">{{ $y->nama }}</option>
+                            }
+                            @endforeach
+                        </select>
+                    </div>
 
-    function hapusFilter()|{
-        window.reload();
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" datadismiss="modal"> Batal</button>
+                    <input type="submit" class="btn btn-primary btn-send" value="Simpan">
+                </div>
+        </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function edit(id, nama, email, no_hp1, no_hp2) {
+        console.log(nama);
+        document.getElementById('idSantri').value = id;
+        document.getElementById('nama').value = nama;
+        document.getElementById('email').value = email;
+        document.getElementById('no_hp1').value = no_hp1;
+        document.getElementById('no_hp2').value = no_hp2;
+
     }
 
+    function hapusFilter() {
+        window.reload();
+    }
 </script>
 @endsection

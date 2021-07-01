@@ -35,6 +35,8 @@ Route::get('/santri', [App\Http\Controllers\santriController::class, 'index'])->
 Route::POST('/santri', [App\Http\Controllers\santriController::class, 'store'])->name('santri-post');
 Route::get('/user/ubahAkses/{id}', [App\Http\Controllers\santriController::class, 'ubahAkses']);
 Route::put('/user/ubahAkses/{id}', [App\Http\Controllers\santriController::class, 'updateAkses']);
+Route::put('/santri', [App\Http\Controllers\santriController::class, 'update']);
+
 
 Route::get('/laporanTahunan', [App\Http\Controllers\laporanController::class, 'perTahun'])->name('laporan');
 Route::get('/laporanTunggakan', [App\Http\Controllers\laporanController::class, 'rekapTunggakan'])->name('laporanTunggakan');

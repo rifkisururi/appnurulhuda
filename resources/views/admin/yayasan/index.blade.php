@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('content')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Master Data Santri</h1>
+    <h1 class="h3 mb-0 text-gray-800">Master Data Yayasan</h1>
 </div>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
 
@@ -39,7 +39,7 @@
                             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalEdit" onclick="change({{ $y->id }},{{ $y->id }},'{{ $y->nama}}')">Edit</button>
                             @php
                             if($y->jumlah == 0){
-                            echo "<button class='btn btn-danger' onclick='hapus({{ $y->id}})'>Hapus</button>";
+                            echo "<a href='?id={$y->id}'><button class='btn btn-danger' onclick='hapus({{$y->id}})'>Hapus</button></a>";
                             }
                             @endphp
                         </td>
@@ -54,7 +54,7 @@
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modaltitle" id="exampleModalScrollableTitle">Tambah Data Santri</h5>
+                <h5 class="modaltitle" id="exampleModalScrollableTitle">Tambah Data Yayasan</h5>
                 <button type="button" class="close" data-dismiss="modal" arialabel="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -71,22 +71,22 @@
                     <button type="button" class="btn btn-secondary" datadismiss="modal"> Batal</button>
                     <input type="submit" class="btn btn-primary btn-send" value="Simpan">
                 </div>
+            </form>
         </div>
-        </form>
     </div>
 </div>
 
 <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" ariahidden="true">
-    <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form action="" method="POST">
-                <input type="hidden" name="_method" value="PUT">
                 @csrf
+                <input type="hidden" name="_method" value="PUT">
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Nama</label>
-                        <input type="text" id="id" name="id" class="form-control" hidden>
-                        <input type="text" id="nama" name="nama" class="form-control">
+                        <input type="text" id="namaYayasan" name="nama" class="form-control">
+                        <input type="text" id="idYayasan" name="idYayasan" class="form-control" hidden>
                     </div>
                     <div class="form-group">
                         <label class="">Status</label>
@@ -97,19 +97,20 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" datadismiss="modal"> Batal</button>
                     <input type="submit" class="btn btn-primary btn-send" value="Simpan">
                 </div>
+            </form>
         </div>
-        </form>
     </div>
 </div>
 
 <script>
     function change(id, status, nama) {
-        document.getElementById('id').value = id;
+        console.log(nama);
+        document.getElementById('namaYayasan').value = nama;
+        document.getElementById('idYayasan').value = id;
         document.getElementById('status').value = status;
-        document.getElementById('nama').value = nama;
+
     }
 
     function hapus(id) {

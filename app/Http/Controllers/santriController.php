@@ -15,15 +15,15 @@ class santriController extends Controller
     {
         if (isset($_GET['id_yayasan'])) {
             $id_yayasan = $_GET['id_yayasan'];
-            if($id_yayasan != 0 ){
+            if ($id_yayasan != 0) {
                 $santri = DB::table('users')
                     ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
                     ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
                     ->join('yayasan', 'yayasan.id', '=', 'users.id_yayasan')
                     ->select('users.*', 'model_has_roles.role_id', 'roles.name as hakAkses', 'yayasan.nama as namaYayasan')
-                    ->where('users.id_yayasan','=',$id_yayasan)
+                    ->where('users.id_yayasan', '=', $id_yayasan)
                     ->get();
-            }else {
+            } else {
                 $santri = DB::table('users')
                     ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
                     ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
@@ -40,7 +40,7 @@ class santriController extends Controller
                 ->get();
         }
 
-        
+
 
         $roles = Role::pluck('name', 'name')->all();
         $yayasan = DB::table('yayasan')->get();
@@ -89,8 +89,22 @@ class santriController extends Controller
             $user->password = Hash::make($request->get('passwordBaru'));
         }
         $user->save();
-
         return redirect('/personalinfo');
+    }
+
+    public function update(Request $request)
+    {
+        $id = $request->get('id');
+        $user = User::find($id);
+        $user->name = $request->get('name');
+        $user->no_hp1 = $request->get('no_hp1');
+        $user->no_hp2 = $request->get('no_hp2');
+        $user->email = $request->get('email');
+        if ($request->get('passwordBaru') != "" && $request->get('passwordBaru') == $request->get('passwordBaru2')) {
+            $user->password = Hash::make($request->get('passwordBaru'));
+        }
+        $user->save();
+        return redirect('/santri');
     }
 
     public function ubahAkses($id)
