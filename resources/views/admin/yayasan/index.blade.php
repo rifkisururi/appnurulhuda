@@ -86,7 +86,7 @@
                     <div class="form-group">
                         <label>Nama</label>
                         <input type="text" id="namaYayasan" name="nama" class="form-control">
-                        <input type="text" id="idYayasan" name="idYayasan" class="form-control">
+                        <input type="text" id="idYayasan" name="idYayasan" class="form-control" hidden>
                     </div>
                     <div class="form-group">
                         <label class="">Status</label>
