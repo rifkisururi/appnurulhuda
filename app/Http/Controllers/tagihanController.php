@@ -9,7 +9,7 @@ use App\Models\tagihan_detail_model;
 class tagihanController extends Controller
 {
     public function index()
-    {
+    {   
         $tagihan =
             DB::table('tagihan_detail')
             ->join('tagihan_master', 'tagihan_master.id', '=', 'tagihan_detail.id_tagihan_master')
@@ -132,12 +132,19 @@ class tagihanController extends Controller
             DB::table('tagihan_master')
             ->where('id', '=', $request->id_tagihan_master)
             ->value('name');
-
-        $kata = "Assalamu'alaikum Bpk/Ibu $name,<br>Terdapat Iuran $nameTagihan sejumlah $request->jumlah jatuh tempo pada $request->jatuhtempo<br> Mohon kerjasamnanya membayar tepat waktu.<br><br>Matur suwun";
-
-        $this->sendWA($no_hp1, $kata);
-        $this->sendWA($no_hp2, $kata);
-
+        
+        $date=date_create($request->jatuhtempo);
+        $jatuhTempo = date_format($date,"d M y");
+        
+        $kata = "*__TPQ NURUL HUDA__*<BR>Ngarena, Genito, Windusari<br><br>Kpd. Yth.<br>Wali Santri Ananda $name<br>Di Kediaman<br><br>Dengan hormat,<br>Bersama dengan pesan ini, kami atas nama *Pengurus TPQ Nurul Huda* memberitahukan bahwa bulan ini saatnya iuran *$nameTagihan* sebesar *Rp. ".number_format($request->jumlah)."* dengan maksimal pembayaran tanggal *$jatuhTempo*.Maka dengan ini kami sangat berharap Bapak, Ibu / Wali dari ananda $name untuk segera melunasinya.<br><br>Wa'alaikumsalam Wr. Wb.";
+        if($no_hp1 !== null && $no_hp1 != 0){
+            $this->sendWA($no_hp1, $kata);
+        }
+        
+        if($no_hp2 !== null && $no_hp2 != 0 && $no_hp1 != $no_hp2){
+            $this->sendWA($no_hp2, $kata);
+        }
+        
         return redirect('tagihan');
     }
 
@@ -207,8 +214,8 @@ class tagihanController extends Controller
 
     public function kirimPesan()
     {
-        $this->sendWA('62895401665951', 'Tagihan Sahriah 10.000 jatuh tempo 2021-06-10 <br>Matur suwun<br><br>Ini hanya uji coba, abaikan saja ');
-        //$this->sendWA('6289691965577', 'Tagihan Sahriah 10.000 jatuh tempo 2021-06-10 <br>Matur suwun<br><br>Ini hanya uji coba, abaikan saja ');
+        $kata = "*____TPQ NURUL HUDA____*<br>Ngarenan, Genito, Windusari<br><br>Kpd. Yth.<br>Wali Santri <br>Di Kediaman <br><br>Assalamu'alaikum Wr. Wb.<br><br>Kami dari TPQ Nurul Huda Ngarenan<br>Memberitahukan bahwa:<br>1. Mulai bulan ini (Juli 2021) Syahriah TPQ akan di ingtakan melalui pesan WA dan nomor resmi ini.<br>2. Melalui nomor ini akan dsampaikan info-info kegiatan resmi dari TPQ Nurul Huda.<br> 3.  Mohon di simpan dan jangan di blokir.<br>4. Wali santri akan mendapatkan pemberitahuan selama putra-putri mengaji ni Nurul Huda<br>5. Pada tanggal 10 dan 15 disetiap bulannya aka ada pemberitahuan.<br>6. Apabila nomor wali santri ganti. Harap memberitahu pengurus TPQ.<br>7. Apabila suatu saat putra-putri / wali santri sudah membayar dan masih ada pesan tagihan harap konformasi dan klarifikasi ke Pengurus TPQ.<br>Demikian kami sampaikan, terimakasih<br>Wassalamu'alaikum Wr. Wb.";
+        $this->sendWA('6285647451640', $kata);
     }
 
     private function sendWA($d, $isiPesan)
@@ -236,4 +243,5 @@ class tagihanController extends Controller
         curl_close($curl);
         echo $response;
     }
+
 }

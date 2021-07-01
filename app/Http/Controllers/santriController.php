@@ -100,6 +100,7 @@ class santriController extends Controller
         $user->no_hp1 = $request->get('no_hp1');
         $user->no_hp2 = $request->get('no_hp2');
         $user->email = $request->get('email');
+        $user->id_yayasan = $request->get('id_yayasan');
         if ($request->get('passwordBaru') != "" && $request->get('passwordBaru') == $request->get('passwordBaru2')) {
             $user->password = Hash::make($request->get('passwordBaru'));
         }
