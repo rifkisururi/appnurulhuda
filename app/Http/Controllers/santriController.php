@@ -33,9 +33,9 @@ class santriController extends Controller
             }
         } else {
             $santri = DB::table('users')
-                ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
-                ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
-                ->join('yayasan', 'yayasan.id', '=', 'users.id_yayasan')
+                ->leftjoin('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+                ->leftjoin('roles', 'model_has_roles.role_id', '=', 'roles.id')
+                ->leftjoin('yayasan', 'yayasan.id', '=', 'users.id_yayasan')
                 ->select('users.*', 'model_has_roles.role_id', 'roles.name as hakAkses', 'yayasan.nama as namaYayasan')
                 ->get();
         }
