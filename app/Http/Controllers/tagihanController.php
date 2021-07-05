@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\tagihan_detail_model;
+use App\Models\tagihan_master_model;
+use App\Models\User;
 
 class tagihanController extends Controller
 {
     public function index()
-    {   
+    {
         $tagihan =
             DB::table('tagihan_detail')
             ->join('tagihan_master', 'tagihan_master.id', '=', 'tagihan_detail.id_tagihan_master')
@@ -62,6 +64,24 @@ class tagihanController extends Controller
         $data->flag_pay = $action;
         if ($action == 1) {
             $data->tanggal_bayar = date('Y-m-d');
+            $jumlah = $data->jumlah;
+            $tagihanMaster = tagihan_master_model::findOrFail($data->id_tagihan_master);
+            $nameTagihan = $tagihanMaster->name;
+
+            $dataSantri = User::findOrFail($data->id);
+            $name = $dataSantri->name;
+            $no_hp1 = $dataSantri->no_hp1;
+            $no_hp2 = $dataSantri->no_hp2;
+            // kirim pesan sudah terima pembayaran
+            $kata = "*__TPQ NURUL HUDA__*<BR>Ngarena, Genito, Windusari<br><br>Kpd. Yth.<br>Wali Santri Ananda $name<br>Di Kediaman<br><br>Dengan hormat,<br>Bersama dengan pesan ini, kami atas nama *Pengurus TPQ Nurul Huda* memberitahukan bahwa kami baru saja menerima pembayaran  *$nameTagihan* sebesar *Rp. " . number_format($jumlah) . "*.<br><br>Wa'alaikumsalam Wr. Wb.";
+
+            if ($no_hp1 !== null && $no_hp1 != 0) {
+                $this->sendWA($no_hp1, $kata);
+            }
+
+            if ($no_hp2 !== null && $no_hp2 != 0 && $no_hp1 != $no_hp2) {
+                $this->sendWA($no_hp2, $kata);
+            }
         } else {
             $data->tanggal_bayar = '2021-01-01';
         }
@@ -132,19 +152,19 @@ class tagihanController extends Controller
             DB::table('tagihan_master')
             ->where('id', '=', $request->id_tagihan_master)
             ->value('name');
-        
-        $date=date_create($request->jatuhtempo);
-        $jatuhTempo = date_format($date,"d M y");
-        
-        $kata = "*__TPQ NURUL HUDA__*<BR>Ngarena, Genito, Windusari<br><br>Kpd. Yth.<br>Wali Santri Ananda $name<br>Di Kediaman<br><br>Dengan hormat,<br>Bersama dengan pesan ini, kami atas nama *Pengurus TPQ Nurul Huda* memberitahukan bahwa bulan ini saatnya iuran *$nameTagihan* sebesar *Rp. ".number_format($request->jumlah)."* dengan maksimal pembayaran tanggal *$jatuhTempo*.Maka dengan ini kami sangat berharap Bapak, Ibu / Wali dari ananda $name untuk segera melunasinya.<br><br>Wa'alaikumsalam Wr. Wb.";
-        if($no_hp1 !== null && $no_hp1 != 0){
+
+        $date = date_create($request->jatuhtempo);
+        $jatuhTempo = date_format($date, "d M y");
+
+        $kata = "*__TPQ NURUL HUDA__*<BR>Ngarena, Genito, Windusari<br><br>Kpd. Yth.<br>Wali Santri Ananda $name<br>Di Kediaman<br><br>Dengan hormat,<br>Bersama dengan pesan ini, kami atas nama *Pengurus TPQ Nurul Huda* memberitahukan bahwa bulan ini saatnya iuran *$nameTagihan* sebesar *Rp. " . number_format($request->jumlah) . "* dengan maksimal pembayaran tanggal *$jatuhTempo*.Maka dengan ini kami sangat berharap Bapak, Ibu / Wali dari ananda $name untuk segera melunasinya.<br><br>Wa'alaikumsalam Wr. Wb.";
+        if ($no_hp1 !== null && $no_hp1 != 0) {
             $this->sendWA($no_hp1, $kata);
         }
-        
-        if($no_hp2 !== null && $no_hp2 != 0 && $no_hp1 != $no_hp2){
+
+        if ($no_hp2 !== null && $no_hp2 != 0 && $no_hp1 != $no_hp2) {
             $this->sendWA($no_hp2, $kata);
         }
-        
+
         return redirect('tagihan');
     }
 
@@ -218,33 +238,36 @@ class tagihanController extends Controller
         $this->sendWA('6285647451640', $kata);
     }
 
-    private function sendWA($d, $isiPesan)
+    private function sendWA($dest, $isiPesan)
     {
         $sender = env("SENDER_WA");
+        $LINK_SENDER = env("LINK_SENDER") . "/sendWA";
+
         $curl = curl_init();
+
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://whapi.io/api/send",
+            CURLOPT_URL => $LINK_SENDER,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
+            CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 0,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "{\r\n  \"app\": {\r\n    \"id\": \"$sender\",\r\n    \"time\": \"1605326773\",\r\n    \"data\": {\r\n      \"recipient\": {\r\n        \"id\": \"$d\"\r\n      },\r\n      \"message\": [\r\n        {\r\n          \"time\": \"1605326773\",\r\n          \"type\": \"text\",\r\n          \"value\": \"$isiPesan\"\r\n        }\r\n      ]\r\n    }\r\n  }\r\n}",
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => array('dest' => $dest, 'isiPesan' => $isiPesan, 'sender' => $sender),
             CURLOPT_HTTPHEADER => array(
-                "Content-Type: text/plain",
-                "Cookie: __cfduid=d424776e2d5021b158f1e64c99f2d7fce1604293254; ci_session=3b712ap59vc924a9o15j5rti70gif6k0"
+                'Accept: application/json'
             ),
         ));
 
         $response = curl_exec($curl);
-        echo $response;
+
         curl_close($curl);
         echo $response;
     }
 
-    public function blast(){
+    public function blast()
+    {
 
         $kata = "*_TPQ NURUL HUDA_*<br>
         ɴɢαreɴαɴ ɢeɴιтo wιɴdυѕαrι<br>
@@ -266,6 +289,5 @@ class tagihanController extends Controller
         7.	Apabila suatu saat putra-putri / wali santri sudah membayar dan masih ada pesan tagihan harap konformasi dan klarifikasi ke Pengurus TPQ.<br>
         Demikian kami sampaikan, terimakasih<br>
         Wassalamu'alaikum Wr. Wb.";
-
     }
 }

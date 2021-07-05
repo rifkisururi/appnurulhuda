@@ -54,7 +54,7 @@
                         </td>
                         <td>
                             <a href="user/ubahAkses/{{ $u->id}}"><button class="btn btn-warning btn-sm">Ubah Akses</button></a>
-                            <button onclick="edit('{{$u->id}}','{{ $u->name}}','{{ $u->email}}','{{ $u->no_hp1}}','{{ $u->no_hp2}}')" type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalEdit">
+                            <button onclick="edit('{{$u->id}}','{{ $u->name}}','{{ $u->email}}','{{ $u->no_hp1}}','{{ $u->no_hp2}}' ,'{{ $u->id_yayasan}}','{{ $u->namaYayasan}}')" type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalEdit">
                                 Edit
                             </button>
                         </td>
@@ -146,8 +146,10 @@
                     </div>
                     <div class="form-group">
                         <label>Yayasan</label>
-                        <select class="form-control" name="id_yayasan" id="yayasan" required>
-                            <option value="">Pilih Yayasan</option>
+                        <select class="form-control" name="id_yayasan" id="" required>
+                            <option value="" id="id_yayasanValue">
+                                <p id="namaYayasan">Nam</p>
+                            </option>
                             @foreach($yayasan as $y){
                             <option value="{{ $y->id }}">{{ $y->nama }}</option>
                             }
@@ -157,7 +159,6 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" datadismiss="modal"> Batal</button>
                     <input type="submit" class="btn btn-primary btn-send" value="Simpan">
                 </div>
         </div>
@@ -166,13 +167,17 @@
 </div>
 
 <script>
-    function edit(id, nama, email, no_hp1, no_hp2) {
+    function edit(id, nama, email, no_hp1, no_hp2, id_yayasan, namaYayasan) {
         console.log(nama);
         document.getElementById('idSantri').value = id;
         document.getElementById('nama').value = nama;
         document.getElementById('email').value = email;
         document.getElementById('no_hp1').value = no_hp1;
         document.getElementById('no_hp2').value = no_hp2;
+        document.getElementById('no_hp2').value = no_hp2;
+        document.getElementById('id_yayasanValue').value = id_yayasan;
+        console.log('namaYayasan', namaYayasan);
+        document.getElementById('id_yayasanValue').innerHTML = namaYayasan;
 
     }
 

@@ -95,13 +95,13 @@
             </div>
             <form action="{{ route('tagihanMaster-post') }}" method="POST">
                 @csrf
+                <input type="hidden" name="_method" value="PUT">
                 <div class="modal-body">
-
                     <div class="form-group">
                         <label>Nama Tagihan</label>
                         <td>
                             <input type="text" class="form-control" name="name" id="namaTagihan" required>
-                            <input type="text" class="form-control" name="name" id="idTagihan" required>
+                            <input type="text" class="form-control" name="idTagihan" id="idTagihan" required hidden>
                         </td>
                     </div>
                     <div class="form-group">
@@ -126,12 +126,10 @@
 
 <script>
     function edit(id, nama, keterangan, jumlah) {
-
-
-
-
-
-
+        document.getElementById('idTagihan').value = id;
+        document.getElementById('namaTagihan').value = nama;
+        document.getElementById('keterangan').value = keterangan;
+        document.getElementById('jumlah').value = jumlah;
     }
 
     function numberWithCommas(x) {
