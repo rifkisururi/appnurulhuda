@@ -81,6 +81,13 @@
                 </div>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('pesan') }}">
+                    <i class="fas fa-envelope-square"></i>
+                    <span>Pesan</span></a>
+            </li>
+
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
