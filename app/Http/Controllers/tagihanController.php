@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\tagihan_detail_model;
 use App\Models\tagihan_master_model;
 use App\Models\User;
+use App\jobs\ProcessSendNotifikasi;
 
 class tagihanController extends Controller
 {
@@ -241,29 +242,13 @@ class tagihanController extends Controller
     private function sendWA($dest, $isiPesan)
     {
         $sender = env("SENDER_WA");
-        $LINK_SENDER = env("LINK_SENDER") . "/sendWA";
 
-        $curl = curl_init();
+        $data['sender'] = $sender;
+        $data['type'] = 0;
+        $data['dest'] = $dest;
+        $data['isiPesan'] = $isiPesan;
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => $LINK_SENDER,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array('dest' => $dest, 'isiPesan' => $isiPesan, 'sender' => $sender),
-            CURLOPT_HTTPHEADER => array(
-                'Accept: application/json'
-            ),
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        echo $response;
+        dispatch(new ProcessSendNotifikasi($data));
     }
 
     public function blast()
