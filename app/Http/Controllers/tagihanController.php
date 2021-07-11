@@ -33,7 +33,6 @@ class tagihanController extends Controller
 
     public function nominal_tagihan($id)
     {
-
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Methods: *');
         header('Access-Control-Allow-Headers: *');
