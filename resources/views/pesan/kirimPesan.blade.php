@@ -75,11 +75,8 @@
         tujuan(1);
     });
 
-
-
     function pengirim(isi) {
         document.getElementById('sender').value = isi;
-
     }
 
     function tujuan(id) {
