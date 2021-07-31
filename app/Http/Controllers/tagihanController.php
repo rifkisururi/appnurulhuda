@@ -225,10 +225,6 @@ class tagihanController extends Controller
                 $this->sendWA($no_hp2, $kata);
             }
         }
-
-
-
-
         return redirect('tagihan');
     }
 

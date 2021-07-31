@@ -49,7 +49,7 @@
                             <div class="col-md-12">
                                 <br>
                                 <label for="email">Isi Pesan</label><br>
-                                <textarea class="form-control" name="isiPesan" rows="3" required></textarea>
+                                <textarea class="form-control" name="isiPesan" rows="3" required placeholder="kata $nama akan digati dengan nama santri"></textarea>
                             </div>
                             <div class="col-md-12">
                                 <br>
