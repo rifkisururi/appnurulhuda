@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Route::get('/setup', function () {
@@ -20,9 +20,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/tagihan', [App\Http\Controllers\tagihanController::class, 'index'])->name('tagihan');
+Route::POST('/generateTagihan', [App\Http\Controllers\tagihanController::class, 'generateTagihan']);
 Route::POST('/tagihan', [App\Http\Controllers\tagihanController::class, 'store']);
 Route::get('/tagihanAction', [App\Http\Controllers\tagihanController::class, 'action']);
-Route::get('/tagihanSantri', [App\Http\Controllers\tagihanController::class, 'vw_tagihanPerSantri']);
+Route::get('/tagihanPerSantri', [App\Http\Controllers\tagihanController::class, 'vw_tagihanPerSantri']);
 
 
 Route::get('/nominal_tagihan/{id}', [App\Http\Controllers\tagihanController::class, 'nominal_tagihan'])->name('nominal_tagihan');
@@ -46,7 +47,7 @@ Route::get('/laporanTunggakan', [App\Http\Controllers\laporanController::class, 
 Route::get('/personalinfo', [App\Http\Controllers\santriController::class, 'personalInfo'])->name('personal-info');
 Route::POST('/personalinfo', [App\Http\Controllers\santriController::class, 'personalInfoUpdate']);
 
-Route::get('/json_tagihanPerSantri', [App\Http\Controllers\tagihanMasterController::class, 'json_tagihanPerSantri'])->name('personal-info');
+Route::get('/json_tagihanPerSantri', [App\Http\Controllers\tagihanMasterController::class, 'json_tagihanPerSantri']);
 
 Route::get('/yayasan', [App\Http\Controllers\yayasan_controller::class, 'index'])->name('yayasan');
 Route::POST('/yayasan', [App\Http\Controllers\yayasan_controller::class, 'store']);

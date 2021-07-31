@@ -187,7 +187,6 @@
                             }
                             @endphp
                         </td>
-
                     </tr>
 
                     @endforeach
@@ -221,7 +220,7 @@
 </div>
 <script>
     function gantiID(id, bulan, tahun) {
-        var url = "tagihanSantri?id=" + id + "&bulan=" + bulan + "&tahun=" + tahun;
+        var url = "tagihanPerSantri?id=" + id + "&bulan=" + bulan + "&tahun=" + tahun;
         document.getElementById('iframe').src = url;
     }
 </script>

@@ -8,21 +8,21 @@
         <div class="table-responsive">
 
             <form method="POST" action="personalinfo">
-            @csrf
+                @csrf
                 <div class="form-group" hidden>
                     <label>NIS</label>
-                    <input type="text" class="form-control" name="nis" value="{{$data->name}}">
+                    <input type="text" class="form-control" name="id" value="{{$data->id}}">
                 </div>
                 <div class="form-group">
                     <label>Nama</label>
-                    <input type="text" class="form-control" name="nama" value="{{$data->name}}">
+                    <input type="text" class="form-control" name="nama" disabled value="{{$data->name}}">
                 </div>
-                
+
                 <div class="form-group">
                     <label>No HP 1</label>
                     <input type="text" class="form-control" name="no_hp1" value="{{$data->no_hp1}}">
                 </div>
-                
+
                 <div class="form-group">
                     <label>No HP 2</label>
                     <input type="text" class="form-control" name="no_hp2" value="{{$data->no_hp2}}">
@@ -31,7 +31,7 @@
                     <label>Alamat Email</label>
                     <input type="email" class="form-control" name="email" value="{{$data->email}}">
                 </div>
-                <div class="form-group">
+                <div class="form-group" hidden>
                     <label for="exampleInputPassword1">Password</label>
                     <input type="password" class="form-control" name="passwordlama">
                 </div>
