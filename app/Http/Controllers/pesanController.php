@@ -83,11 +83,11 @@ class pesanController extends Controller
             if ($no_hp1 != "0" || $no_hp1 != null) {
                 $data['dest'] = $no_hp1;
 
-                //dispatch(new ProcessSendNotifikasi($data));
+                dispatch(new ProcessSendNotifikasi($data));
             }
             if (($no_hp2 != "0" || $no_hp2 != null) && $no_hp1 != $no_hp2) {
                 $data['dest'] = $no_hp2;
-                //dispatch(new ProcessSendNotifikasi($data));
+                dispatch(new ProcessSendNotifikasi($data));
             }
         }
 
