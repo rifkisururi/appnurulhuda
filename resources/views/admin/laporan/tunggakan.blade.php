@@ -22,7 +22,7 @@
                     <tr>
                         <td>{{$d->name}}</td>
                         <td>{{$d->NamaYayasan}}</td>
-                        
+
                         <td>
                             @php
                             echo $d->tunggakan;
@@ -47,7 +47,6 @@
 </div>
 <!-- Button trigger modal -->
 
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
@@ -70,7 +69,7 @@
 </div>
 <script>
     function gantiID(id) {
-        var url = "tagihanSantri?id=" + id;
+        var url = "tagihanPerSantri?id=" + id;
         document.getElementById('iframe').src = url;
     }
 </script>

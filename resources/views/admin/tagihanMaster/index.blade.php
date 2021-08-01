@@ -4,8 +4,8 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Data Tagihan</h1>
 </div>
-<div class="card-header py-3" align="right">
-    <button type="button" class="d-none d-sm-inline-block btn btn-sm btnprimary shadow-sm" data-toggle="modal" data-target="#exampleModalScrollable">
+<div class="card-header py-3">
+    <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#exampleModalScrollable">
         <i class="fas fa-plus fa-sm text-white-50"></i> Tambah
     </button>
 </div>

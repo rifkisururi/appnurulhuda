@@ -15,7 +15,7 @@
                             <div class="col-md-12">
                                 <label for="user">Media</label><br>
                                 <input type="radio" name="media" value="whatsapp" onclick="pengirim('{{$SENDER_WA}}')" required> Whatsapp
-                                <input type="radio" name="media" value="email" onclick="pengirim('{{$SENDER_EMAIL}}')"> E-Mail
+                                <input type="radio" name="media" value="email" onclick="pengirim('{{$SENDER_EMAIL}}')" disabled> E-Mail (dalam pengembangan)
                             </div>
                             <div class="col-md-6">
                                 <br>
@@ -49,7 +49,7 @@
                             <div class="col-md-12">
                                 <br>
                                 <label for="email">Isi Pesan</label><br>
-                                <textarea class="form-control" name="isiPesan" rows="3" required></textarea>
+                                <textarea class="form-control" name="isiPesan" rows="3" required placeholder="kata $nama akan digati dengan nama santri"></textarea>
                             </div>
                             <div class="col-md-12">
                                 <br>

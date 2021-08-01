@@ -4,10 +4,15 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Data Tagihan</h1>
 </div>
-<div class="card-header py-3" align="right">
-    <button type="button" class="d-none d-sm-inline-block btn btn-sm btnprimary shadow-sm" data-toggle="modal" data-target="#exampleModalScrollable">
+<div class="card-header py-3">
+    <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#exampleModalScrollable">
         <i class="fas fa-plus fa-sm text-white-50"></i> Tambah
     </button>
+
+    <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#generateTagihan">
+        <i class="fas fa-plus fa-sm text-white-50"></i> Generate Tagihan
+    </button>
+
 </div>
 
 
@@ -78,7 +83,7 @@
     </div>
 </div>
 <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" ariahidden="true">
-    <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modaltitle" id="exampleModalScrollableTitle">Tambah Data Tagihan</h5>
@@ -111,8 +116,62 @@
                     </div>
                     <div class="form-group">
                         <label>Jumlah</label>
-                        <input type="text" class="form-control" id="jumlah" disabled>
+                        <input type="text" class="form-control jumlah" id="jumlah" disabled>
                         <input type="text" class="form-control" hidden name="jumlah" id="jumlah2">
+                    </div>
+                    <div class="form-group">
+                        <label>Jatuh Tempo</label>
+                        <input type="date" class="form-control" name="jatuhtempo">
+                    </div>
+                    <div class="form-group">
+                        <label style="color: red;">Setelah tekan tombol "Simpan", orang tua/ Wali santri akan mendapat notifkasi tagihan melalui Whatsapp</label>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" datadismiss="modal"> Batal</button>
+                    <input type="submit" class="btn btn-primary btn-send" value="Simpan">
+                </div>
+        </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="generateTagihan" tabindex="-1" role="dialog" aria-labelledby="generateTagihan" ariahidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modaltitle" id="generateTagihan">Tambah Data Tagihan</h5>
+                <button type="button" class="close" data-dismiss="modal" arialabel="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="generateTagihan" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Pilih Yayasan</label><br>
+                        <input type="radio" name="yayasan" value="0" required> Semua Yayasan<br>
+                        @foreach($yayasan as $y)
+                        <input type="radio" name="yayasan" value="{{ $y->id }}"> Semua Santri {{ $y->nama }}<br>
+                        @endforeach
+
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Tagihan</label>
+                        <select class="form-control" name="id_tagihan_master" id="id_tagihan_master2" onchange='getNominal()' required data-live-search="true">
+                            <option value="">Pilih Tagihan</option>
+                            @foreach($tagihan_master as $tm){
+                            <option value="{{ $tm->id }}">{{ $tm->name }}</option>
+                            }
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Jumlah</label>
+                        <input type="text" class="form-control jumlah" id="jumlah3" disabled>
+                        <input type="text" class="form-control jumlah" hidden name="jumlah" id="jumlah4">
                     </div>
                     <div class="form-group">
                         <label>Jatuh Tempo</label>
@@ -146,11 +205,17 @@
 
     function getNominal() {
         var id = document.getElementById("id_tagihan_master").value;
+        if (id == null || id == "") {
+            var id = document.getElementById("id_tagihan_master2").value;
+        }
+
         var url = "nominal_tagihan/" + id;
         $.get(url, function(data) {
             console.log(data.data.jumlah);
             document.getElementById("jumlah").value = data.data.jumlah;
             document.getElementById("jumlah2").value = data.data.jumlah;
+            document.getElementById("jumlah3").value = data.data.jumlah;
+            document.getElementById("jumlah4").value = data.data.jumlah;
 
         });
     }
@@ -168,7 +233,6 @@
             $.get(url, function(data) {
                 location.reload();
             });
-
         }
     }
 

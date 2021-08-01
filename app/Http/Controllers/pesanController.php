@@ -78,11 +78,13 @@ class pesanController extends Controller
                 ->where('id', '=', $user)
                 ->value('name');
 
-            $data['isiPesan']  = str_replace('$nama', $nama, $isiPesan);
-            //echo str_replace('$nama', $nama, $isiPesan);
+
+            $isiPesan = preg_replace("/\r\n|\r|\n/", '', str_replace('$nama', $nama, $isiPesan));
+
+            $data['isiPesan'] = $isiPesan;
+
             if ($no_hp1 != "0" || $no_hp1 != null) {
                 $data['dest'] = $no_hp1;
-
                 dispatch(new ProcessSendNotifikasi($data));
             }
             if (($no_hp2 != "0" || $no_hp2 != null) && $no_hp1 != $no_hp2) {
