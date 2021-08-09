@@ -4,7 +4,10 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Data Tagihan</h1>
 </div>
+
+@role('bendahara')
 <div class="card-header py-3">
+
     <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#exampleModalScrollable">
         <i class="fas fa-plus fa-sm text-white-50"></i> Tambah
     </button>
@@ -14,7 +17,7 @@
     </button>
 
 </div>
-
+@endrole
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <div class="card-body">
@@ -28,7 +31,9 @@
                         <th>Nominal</th>
                         <th>Jatuh Tempo</th>
                         <th>Status</th>
+                        @role('bendahara')
                         <th>Aksi</th>
+                        @endrole
                     </tr>
                 </thead>
                 <tbody>
@@ -49,6 +54,7 @@
                             }
                             ?>
                         </td>
+                        @role('bendahara')
                         <td>
 
                             @php
@@ -59,7 +65,6 @@
                             }else{
                             $tgl1 = date('Y-m-d'); // pendefinisian tanggal awal
                             $tgl2 = date('Y-m-d', strtotime('-3 days', strtotime($tgl1)));
-
                             if ($t->tanggal_bayar >= $tgl2) {
                             @endphp
                             <button class="btn btn-warning" onclick="action({{$t->id}},0)">batalkan penerimaan</button>
@@ -67,14 +72,14 @@
                             }else{
                             @endphp
                             <button class='btn btn-success'>Lunas</button>
-
                             @php
                             }
                             }
 
                             @endphp
-
                         </td>
+                        @endrole
+
                     </tr>
                     @endforeach
                 </tbody>

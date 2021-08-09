@@ -22,9 +22,12 @@
                 <button class="btn btn-primary">Filter</button>
             </div>
         </form>
+
+
         <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#exampleModalScrollable">
             <i class="fas fa-plus fa-sm text-white-50 "></i> Tambah
         </button>
+
         <br>
         <br>
         <div class="table-responsive">
@@ -53,10 +56,15 @@
                             {{ $u->hakAkses}}
                         </td>
                         <td>
+
+                            @role('admin')
                             <a href="user/ubahAkses/{{ $u->id}}"><button class="btn btn-warning btn-sm">Ubah Akses</button></a>
+                            @endrole
+
                             <button onclick="edit('{{$u->id}}','{{ $u->name}}','{{ $u->email}}','{{ $u->no_hp1}}','{{ $u->no_hp2}}' ,'{{ $u->id_yayasan}}','{{ $u->namaYayasan}}')" type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalEdit">
                                 Edit
                             </button>
+
                         </td>
                     </tr>
                     @endforeach
