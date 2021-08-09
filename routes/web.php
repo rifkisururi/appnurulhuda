@@ -57,3 +57,6 @@ Route::PUT('/yayasan', [App\Http\Controllers\yayasan_controller::class, 'edit'])
 Route::get('/kirimPesan', [App\Http\Controllers\tagihanController::class, 'kirimPesan']);
 Route::get('/pesan', [App\Http\Controllers\pesanController::class, 'index'])->name('pesan');
 Route::POST('/pesan', [App\Http\Controllers\pesanController::class, 'kirimPesan']);
+
+Route::POST('/passwordBaru', [App\Http\Controllers\santriController::class, 'passwordBaru'])->name('passwordBaru');
+
