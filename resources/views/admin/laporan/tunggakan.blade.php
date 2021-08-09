@@ -14,7 +14,9 @@
                         <th>Yayasan</th>
                         <th>Tunggakan</th>
                         <th>Total</th>
+                        @role('bendahara')
                         <th>Aksi</th>
+                        @endrole
                     </tr>
                 </thead>
                 <tbody>
@@ -33,11 +35,14 @@
                             echo number_format($d->total);
                             @endphp
                         </td>
+                        @role('bendahara')
                         <td>
                             <button onclick="gantiID({{$d->id}})" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 Terima Pembayaran
                             </button>
                         </td>
+                        @endrole
+
                     </tr>
                     @endforeach
                 </tbody>

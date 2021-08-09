@@ -24,13 +24,10 @@
                         <th>Jatuh Tempo</th>
                         @guest
                         @else
-                        @if (Auth::user()->hasRole('admin') or Auth::user()->hasRole('bendahara'))
+                        @if (Auth::user()->hasRole('bendahara'))
                         <th>Aksi</th>
                         @endif
                         @endguest
-
-
-
                     </tr>
                 </thead>
                 <tbody>
@@ -39,10 +36,9 @@
                         <td>{{ $t->name}}</td>
                         <td> <?php echo number_format($t->jumlah) ?></td>
                         <td>{{ $t->jatuh_tempo}}</td>
-
                         @guest
                         @else
-                        @if (Auth::user()->hasRole('admin') or Auth::user()->hasRole('bendahara'))
+                        @if (Auth::user()->hasRole('bendahara'))
                         <td>
                             <button class="btn btn-info" onclick="action({{$t->id}},1)">Terima Pembayaran</button>
                         </td>
@@ -56,7 +52,7 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
 <script>
     function action(id, status) {
