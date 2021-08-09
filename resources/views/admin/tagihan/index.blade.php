@@ -126,8 +126,6 @@
                     <div class="form-group">
                         <label style="color: red;">Setelah tekan tombol "Simpan", orang tua/ Wali santri akan mendapat notifkasi tagihan melalui Whatsapp</label>
                     </div>
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" datadismiss="modal"> Batal</button>
