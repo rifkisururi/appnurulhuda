@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
+use App\jobs\ProcessSendNotifikasi;
 
 class santriController extends Controller
 {
@@ -130,19 +131,28 @@ class santriController extends Controller
 
     public function passwordBaru(Request $request)
     {
-        $id = $request->get('id');
-        $user = User::find($id);
-        $user->name = $request->get('name');
-        $user->no_hp1 = $request->get('no_hp1');
-        $user->no_hp2 = $request->get('no_hp2');
-        $user->email = $request->get('email');
-        $user->id_yayasan = $request->get('id_yayasan');
-        if ($request->get('passwordBaru') != "" && $request->get('passwordBaru') == $request->get('passwordBaru2')) {
+        $no_hp = $request->get('wa');
+        
+        $santri = DB::table('users')
+                ->where('no_hp1','=', $no_hp)
+                ->select('id')
+                ->first();                    
 
-            $user->password = Hash::make($request->get('passwordBaru'));
-        }
+        $user = User::find($santri->id);
+        $mt_rand = mt_rand(1000, 9999);
+        $user->password = Hash::make($mt_rand);
         $user->save();
-        return redirect('/santri');
-    }
+        
+        $sender = env("SENDER_WA");
 
+        $isiPesan = "Berikut password baru nya, ".$mt_rand;
+
+        $data['sender'] = $sender;
+        $data['type'] = 0;
+        $data['dest'] = $no_hp;
+        $data['isiPesan'] = $isiPesan;
+
+        dispatch(new ProcessSendNotifikasi($data));
+        return redirect('/login');
+    }
 }
