@@ -35,7 +35,7 @@ class ProcessSendNotifikasi implements ShouldQueue
 
         if ($type == 0) {
             $sender = env("SENDER_WA");
-            $LINK_SENDER = env("LINK_SENDER") . "/sendWA2";
+            $LINK_SENDER = env("LINK_SENDER") . "/sendWA";
         } else if ($type == 1) {
             $sender = env("SENDER_EMAIL");
             $LINK_SENDER = env("LINK_SENDER") . "/sendEmail";
