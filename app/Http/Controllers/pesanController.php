@@ -40,6 +40,7 @@ class pesanController extends Controller
             $type = 1;
         } else if ($media == "whatsapp") {
             $sender = env("SENDER_WA");
+            $isiPesan = $s = str_replace("/n", '<br>', $isiPesan);
             $type = 0;
         }
 
@@ -78,7 +79,9 @@ class pesanController extends Controller
                 ->value('name');
 
 
-            $isiPesan = str_replace('$nama', $nama, $isiPesan);
+            echo $isiPesan;
+
+            $isiPesan = preg_replace("/\r\n|\r|\n/", '<br>', str_replace('$nama', $nama, $isiPesan));
 
             $data['isiPesan'] = $isiPesan;
 

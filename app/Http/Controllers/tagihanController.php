@@ -78,7 +78,7 @@ class tagihanController extends Controller
             $no_hp2 = $dataSantri->no_hp2;
 
             // kirim pesan sudah terima pembayaran
-            $kata = "*__TPQ NURUL HUDA__*<BR>Ngarena, Genito, Windusari<br><br>Kpd. Yth.<br>Wali Santri Ananda $name<br>Di Kediaman<br><br>Dengan hormat,<br>Bersama dengan pesan ini, kami atas nama *Pengurus TPQ Nurul Huda* memberitahukan bahwa kami baru saja menerima pembayaran  *$nameTagihan* sebesar *Rp. " . number_format($jumlah) . "*.<br><br>Wa'alaikumsalam Wr. Wb.";
+            $kata = "*__TPQ NURUL HUDA__*<br>Ngarena, Genito, Windusari<br><br>Kpd. Yth.<br>Wali Santri Ananda $name<br>Di Kediaman<br><br>Dengan hormat,<br>Bersama dengan pesan ini, kami atas nama *Pengurus TPQ Nurul Huda* memberitahukan bahwa kami baru saja menerima pembayaran  *$nameTagihan* sebesar *Rp. " . number_format($jumlah) . "*.<br><br>Wa'alaikumsalam Wr. Wb.";
 
             if ($no_hp1 !== null && $no_hp1 != 0) {
                 $this->sendWA($no_hp1, $kata);
@@ -161,7 +161,7 @@ class tagihanController extends Controller
         $date = date_create($request->jatuhtempo);
         $jatuhTempo = date_format($date, "d M y");
 
-        $kata = "*__TPQ NURUL HUDA__*<BR>Ngarena, Genito, Windusari<br><br>Kpd. Yth.<br>Wali Santri Ananda $name<br>Di Kediaman<br><br>Dengan hormat,<br>Bersama dengan pesan ini, kami atas nama *Pengurus TPQ Nurul Huda* memberitahukan bahwa bulan ini saatnya iuran *$nameTagihan* sebesar *Rp. " . number_format($request->jumlah) . "* dengan maksimal pembayaran tanggal *$jatuhTempo*.Maka dengan ini kami sangat berharap Bapak, Ibu / Wali dari ananda $name untuk segera melunasinya.<br><br>Wa'alaikumsalam Wr. Wb.";
+        $kata = "*__TPQ NURUL HUDA__*<br>Ngarena, Genito, Windusari<br><br>Kpd. Yth.<br>Wali Santri Ananda $name<br>Di Kediaman<br><br>Dengan hormat,<br>Bersama dengan pesan ini, kami atas nama *Pengurus TPQ Nurul Huda* memberitahukan bahwa bulan ini saatnya iuran *$nameTagihan* sebesar *Rp. " . number_format($request->jumlah) . "* dengan maksimal pembayaran tanggal *$jatuhTempo*.Maka dengan ini kami sangat berharap Bapak, Ibu / Wali dari ananda $name untuk segera melunasinya.<br><br>Wa'alaikumsalam Wr. Wb.";
         if ($no_hp1 !== null && $no_hp1 != 0) {
             $this->sendWA($no_hp1, $kata);
         }
@@ -217,7 +217,7 @@ class tagihanController extends Controller
             $jatuhTempo = date_format($date, "d M y");
             
             
-            $kata = "*__TPQ NURUL HUDA__*<BR>Ngarena, Genito, Windusari<br><br>Kpd. Yth.<br>Wali Santri Ananda $name<br>Di Kediaman<br><br>Dengan hormat,<br>Bersama dengan pesan ini, kami atas nama *Pengurus TPQ Nurul Huda* memberitahukan bahwa bulan ini saatnya iuran *$nameTagihan* sebesar *Rp. " . number_format($request->jumlah) . "* dengan maksimal pembayaran tanggal *$jatuhTempo*.Maka dengan ini kami sangat berharap Bapak, Ibu / Wali dari ananda $name untuk segera melunasinya.<br><br>Wa'alaikumsalam Wr. Wb.";
+            $kata = "*__TPQ NURUL HUDA__*<br>Ngarena, Genito, Windusari<br><br>Kpd. Yth.<br>Wali Santri Ananda $name<br>Di Kediaman<br><br>Dengan hormat,<br>Bersama dengan pesan ini, kami atas nama *Pengurus TPQ Nurul Huda* memberitahukan bahwa bulan ini saatnya iuran *$nameTagihan* sebesar *Rp. " . number_format($request->jumlah) . "* dengan maksimal pembayaran tanggal *$jatuhTempo*.Maka dengan ini kami sangat berharap Bapak, Ibu / Wali dari ananda $name untuk segera melunasinya.<br><br>Wa'alaikumsalam Wr. Wb.";
             if ($no_hp1 !== null && $no_hp1 != 0) {
                 $this->sendWA($no_hp1, $kata);
             }
