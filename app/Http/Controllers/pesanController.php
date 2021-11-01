@@ -78,9 +78,6 @@ class pesanController extends Controller
                 ->where('id', '=', $user)
                 ->value('name');
 
-
-            echo $isiPesan;
-
             $isiPesan = preg_replace("/\r\n|\r|\n/", '<br>', str_replace('$nama', $nama, $isiPesan));
 
             $data['isiPesan'] = $isiPesan;
