@@ -99,7 +99,7 @@
                     </div>
                     <div class="form-group">
                         <label>No Hp Alternatif</label>
-                        <input type="text" name="no_hp2" class="form-control">
+                        <input type="number" name="no_hp2" class="form-control" value="628">
                     </div>
                     <div class="form-group">
                         <label>Yayasan</label>
