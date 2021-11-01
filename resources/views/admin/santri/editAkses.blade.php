@@ -7,7 +7,7 @@
         <legend>Ubah Akses User</legend>
         <div class="form-group row">
             <div class="col-md-6">
-                <label for="user">Nama User</label>
+                <label for="user">Nama</label>
                 <input id="name" type="text" name="uname" class="form-control" value="{{$user->name}}" readonly>
             </div>
             <div class="col-md-6">

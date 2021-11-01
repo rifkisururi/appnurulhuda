@@ -213,10 +213,10 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Pilih "Logout" apabila ingin keluar aplikasi</div>
+                <div class="modal-body">Pilih "Keluar" apabila ingin keluar aplikasi</div>
                 <div class="modal-footer">
                     <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
+                        Keluar
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf

@@ -95,7 +95,7 @@
                     </div>
                     <div class="form-group">
                         <label>No Hp</label>
-                        <input type="text" name="no_hp1" class="form-control">
+                        <input type="number" name="no_hp1" class="form-control" value="628">
                     </div>
                     <div class="form-group">
                         <label>No Hp Alternatif</label>
